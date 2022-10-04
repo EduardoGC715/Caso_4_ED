@@ -1,3 +1,4 @@
+# pragma once
 # include "TreeNode.h"
 
 template<typename T>

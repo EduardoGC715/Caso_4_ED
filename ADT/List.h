@@ -102,7 +102,7 @@ class List: public Stack<T>, public Queue<T> {
             }
         }
 
-        int find(const T& pData) {
+        int find(T* pData) {
             int index = 0;
             Node<T>* current = head;
             while (current != NULL) {
