@@ -1,21 +1,20 @@
 #include <iostream>
-
-#ifndef CAMARA
-#define CAMARA
-
-class Camara {
+#ifndef CHAMBER
+#define CHAMBER
+//Nodo
+class Chamber {
 private:
     //nodo
-    Camara *parent;
-    Camara *next_lower;
-    Camara *next_higher;
+    Chamber *parent;
+    Chamber *next_lower;
+    Chamber *next_higher;
     //datos
     int minerals;
     int distance;
     int potential;
-    int id;
+    int cham_id;
 public:
-    Camara() {
+    Chamber() {
         //nodo
         parent = nullptr;
         next_lower = nullptr;
@@ -24,10 +23,10 @@ public:
         minerals=0;
         distance=0;
         potential=0;
-        id=0;
+        cham_id=0;
     }
 
-    Camara(int pminerals,int pdistance,int pid) {
+    Chamber(int pminerals, int pdistance, int pcham_id) {
         parent = nullptr;
         next_lower = nullptr;
         next_higher = nullptr;
@@ -35,25 +34,25 @@ public:
         minerals = pminerals;
         distance = pdistance;
         potential=pminerals*pdistance;
-        id=pid;
+        cham_id=pcham_id;
     }
 
-    void set_parent(Camara *parent_cam) {
+    void set_parent(Chamber *parent_cam) {
         parent = parent_cam;
     }
-    void set_next_lower(Camara *plower_cam) {
+    void set_next_lower(Chamber *plower_cam) {
         next_lower = plower_cam;
     }
-    void set_next_higher(Camara *phigher_cam) {
+    void set_next_higher(Chamber *phigher_cam) {
         next_higher = phigher_cam;
     }
-    Camara* get_parent() {
+    Chamber* get_parent() {
         return parent;
     }
-    Camara* get_next_lower() {
+    Chamber* get_next_lower() {
         return next_lower;
     }
-    Camara* get_next_hiher() {
+    Chamber* get_next_higher() {
         return next_higher;
     }
 
@@ -67,8 +66,7 @@ public:
         return potential;
     }
     int get_id() {
-        return id;
+        return cham_id;
     }
 };
-
 #endif
