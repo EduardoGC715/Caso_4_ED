@@ -1,0 +1,3 @@
+C:/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug/CMakeFiles/Caso_4_ED.dir
+C:/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug/CMakeFiles/rebuild_cache.dir
