@@ -4,7 +4,7 @@
 
 #ifndef ROOM
 #define ROOM
-
+//list Node
 class Room {
 private:
     Tunnel *tunnel;
@@ -27,11 +27,14 @@ public:
         doors[3]=nullptr;//West
         room_id=proom_id;
     }
-    void Generate_tunnel(){
+    void Generate_Tunnel(){
         int tunnel_prob = rand() % 100;
         if (tunnel_prob<66){
             tunnel = new Tunnel();
         }
+    }
+    Tunnel* Get_Tunnel(){
+        return tunnel;
     }
 };
 

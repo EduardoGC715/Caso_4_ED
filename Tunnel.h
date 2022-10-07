@@ -3,14 +3,14 @@
 
 #ifndef TUNNEL
 #define TUNNEL
-//arbol AVL
+//AVL tree
 class Tunnel {
 private:
     Chamber *root;
 
     int max_distance;
     int num_chambers;
-    int tunl_id;
+    int tunnel_ID;
 public:
 
 };

@@ -102,7 +102,8 @@
 				1,
 				2,
 				3,
-				4
+				4,
+				5
 			]
 		}
 	],
@@ -116,22 +117,27 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Mapa.h",
+			"path" : "Map.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Habitacion.h",
+			"path" : "Room.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Tunel.h",
+			"path" : "Tunnel.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Camara.h",
+			"path" : "Chamber.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "AVL_tree.h",
 			"sourceGroupIndex" : 1
 		}
 	],

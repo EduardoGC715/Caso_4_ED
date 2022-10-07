@@ -2,7 +2,7 @@
 
 #ifndef CHAMBER
 #define CHAMBER
-//Nodo
+//Tree Node
 class Chamber {
 private:
     //nodo
@@ -11,9 +11,10 @@ private:
     Chamber *next_higher;
     //datos
     int minerals;
-    int distance;
+    int distance_from_root;
     int potential;
-    int cham_id;
+    int height;
+    int cham_ID;
 public:
     Chamber() {
         //nodo
@@ -22,52 +23,60 @@ public:
         next_higher = nullptr;
         //datos
         minerals=0;
-        distance=0;
+        distance_from_root=0;
         potential=0;
-        cham_id=0;
+        height=0;
+        cham_ID=0;
     }
 
-    Chamber(int pminerals, int pdistance, int pcham_id) {
+    Chamber(int pminerals, int pdistance, int pcham_ID) {
         parent = nullptr;
         next_lower = nullptr;
         next_higher = nullptr;
 
         minerals = pminerals;
-        distance = pdistance;
+        distance_from_root = pdistance;
         potential=pminerals*pdistance;
-        cham_id=pcham_id;
+        height=1;
+        cham_ID=pcham_ID;
     }
 
-    void set_parent(Chamber *parent_cam) {
+    void Set_Parent(Chamber *parent_cam) {
         parent = parent_cam;
     }
-    void set_next_lower(Chamber *plower_cam) {
+    void Set_Next_Lower(Chamber *plower_cam) {
         next_lower = plower_cam;
     }
-    void set_next_higher(Chamber *phigher_cam) {
+    void Set_Next_Higher(Chamber *phigher_cam) {
         next_higher = phigher_cam;
     }
-    Chamber* get_parent() {
+    Chamber* Get_Parent() {
         return parent;
     }
-    Chamber* get_next_lower() {
+    Chamber* Get_Next_Lower() {
         return next_lower;
     }
-    Chamber* get_next_higher() {
+    Chamber* Get_Next_Higher() {
         return next_higher;
     }
 
-    int get_minerals() {
+    int Set_Height(int pheight) {
+        height=pheight;
+    }
+    int Get_Minerals() {
         return minerals;
     }
-    int get_distance() {
-        return distance;
+    int Get_Distance() {
+        return distance_from_root;
     }
-    int get_potential() {
+    int Get_Potential() {
         return potential;
     }
-    int get_id() {
-        return cham_id;
+    int Get_Height() {
+        return height;
+    }
+    int Get_ID() {
+        return cham_ID;
     }
 };
 #endif
