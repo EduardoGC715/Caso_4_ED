@@ -138,7 +138,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "AVL_tree.h",
+			"path" : "AVL_Tree.h",
 			"sourceGroupIndex" : 1
 		},
 		{

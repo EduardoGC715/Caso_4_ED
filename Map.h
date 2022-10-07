@@ -1,6 +1,5 @@
 #include "Room.h"
 #include <iostream>
-using namespace std;
 
 #ifndef MAP
 #define MAP
