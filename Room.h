@@ -1,7 +1,9 @@
 #include "Tunnel.h"
 #include <iostream>
 #include <cstdlib>
+using namespace std;
 
+//cambiar a nodo generico
 #ifndef ROOM
 #define ROOM
 //list Node

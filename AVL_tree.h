@@ -1,11 +1,14 @@
-#include "Chamber.h"
-#include<bits/stdc++.h>
+#include "Tree_Node.h"
+#include <iostream>
 using namespace std;
+
 #ifndef AVL_TREE
 #define AVL_TREE
+
+template <class T>
 class AVL_tree{
 private:
-    Chamber *root;
+    Node<T>* root;
 
     int max_distance;
     int num_chambers;
