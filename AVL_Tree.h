@@ -140,8 +140,8 @@ public:
         return t_node;
     }
 
-    void smart_print_tree(std::string t_indent){
-        print_tree(m_root, t_indent, true);
+    void smart_print_tree(){
+        print_tree(m_root, "", true);
     }
     void print_tree(Node<T>* t_root, std::string t_indent, bool t_last) {
         if (t_root != nullptr) {
