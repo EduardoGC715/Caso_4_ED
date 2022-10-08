@@ -143,8 +143,8 @@ public:
     void smart_print_tree(){
         print_tree(m_root, "", true);
     }
-    void print_tree(Node<T>* t_root, std::string t_indent, bool t_last) {
-        if (t_root != nullptr) {
+    void print_tree(Node<T>* t_node, std::string t_indent, bool t_last) {
+        if (t_node != nullptr) {
             std::cout << t_indent;
             if (t_last) {
                 std::cout << "R----";
@@ -153,11 +153,10 @@ public:
                 std::cout << "L----";
                 t_indent += "|  ";
             }
-            std::cout << t_root->get_key() << std::endl;
-            print_tree(t_root->get_left(), t_indent, false);
-            print_tree(t_root->get_right(), t_indent, true);
+            std::cout << t_node->get_key() << std::endl;
+            print_tree(t_node->get_left(), t_indent, false);
+            print_tree(t_node->get_right(), t_indent, true);
         }
     }
 };
-
 #endif
