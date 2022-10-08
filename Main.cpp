@@ -12,7 +12,8 @@ int main() {
     prueba_arbol->smart_insert_node(new int(11),11);
 
     prueba_arbol->smart_print_tree("");
-    //root = deleteNode(root, 13);
-    //cout << "After deleting " << endl;
-    //printTree(root, "", true);
+    prueba_arbol->smart_delete_node(13);
+    prueba_arbol->smart_delete_node(11);
+    std::cout << "After deleting " << std::endl;
+    prueba_arbol->smart_print_tree("");
 }

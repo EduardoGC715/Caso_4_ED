@@ -2,7 +2,7 @@
 
 #ifndef CHAMBER
 #define CHAMBER
-//Tree Node
+
 class Chamber {
 private:
     int minerals;
@@ -10,13 +10,6 @@ private:
     int potential;
     int cham_ID;
 public:
-    Chamber() {
-        minerals=0;
-        distance_from_root=0;
-        potential=0;
-        cham_ID=0;
-    }
-
     Chamber(int pminerals, int pdistance, int pcham_ID) {
         minerals = pminerals;
         distance_from_root = pdistance;
