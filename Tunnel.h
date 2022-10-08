@@ -7,11 +7,10 @@
 //AVL tree
 class Tunnel {
 private:
-    Chamber *root;
+    int m_max_distance;
+    int m_chambers;
+    int m_tunnel_ID;
 
-    int max_distance;
-    int num_chambers;
-    int tunnel_ID;
 public:
 
 };

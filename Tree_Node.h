@@ -8,22 +8,16 @@ class Node {
 
 private:
     T* m_data;
+    int m_key;
     Node* m_left;
     Node* m_right;
     Node* m_parent;
     int m_height;
 
 public:
-    Node(){
-        m_data = NULL;
-        m_left = NULL;
-        m_right = NULL;
-        m_parent = NULL;
-        m_height = 1;
-    }
-
-    Node(T* t_data) {
+    Node(T* t_data,int t_key) {
         m_data = t_data;
+        m_key=t_key;
         m_left = NULL;
         m_right = NULL;
         m_parent = NULL;
@@ -35,6 +29,13 @@ public:
     }
     void set_data(T* t_data){
         m_data = t_data;
+    }
+
+    int get_key(){
+        return m_key;
+    }
+    void set_key(int t_key){
+        m_key = t_key;
     }
 
     Node* get_left(){
