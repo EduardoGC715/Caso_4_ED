@@ -115,7 +115,7 @@ public:
             t_node->set_right(delete_node(t_node->get_right(), t_key));
         }
         else {
-            Node<T>* aux = nullptr;
+            Node<T>* aux;
             if ((t_node->get_left() == nullptr) || (t_node->get_right() == nullptr)) {
                 aux = t_node->get_left() ? t_node->get_left() : t_node->get_right();
                 if (aux == nullptr) {
