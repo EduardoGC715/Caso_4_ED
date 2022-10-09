@@ -155,7 +155,7 @@ public:
                 std::cout << "L----";
                 t_indent += "|  ";
             }
-            std::cout << t_node->get_key() <<" data: "<<t_node->get_data()->get_potential()<< std::endl;
+            std::cout << t_node->get_key() <<" data: "<<"min:"<<t_node->get_data()->get_minerals()<<" dist:"<<t_node->get_data()->get_distance()<<" pot:"<<t_node->get_data()->get_potential()<<" ID:"<<t_node->get_data()->get_ID()<< std::endl;
             print_tree(t_node->get_left(), t_indent, false);
             print_tree(t_node->get_right(), t_indent, true);
         }

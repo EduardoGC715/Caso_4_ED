@@ -31,19 +31,15 @@ public:
 
             std::random_device rd; // obtain a random number from hardware
             std::mt19937 gen(rd()); // seed the generator
-            std::uniform_int_distribution<> minerals_distr(1,20);// set range
 
+            std::uniform_int_distribution<> minerals_distr(1,20);// set range
             minerals=minerals_distr(gen); //generate random number
-            std::cout<<"\nminerals "<<minerals<<std::endl;
 
             std::uniform_int_distribution<> distance_distr(10,80);
-
             distance=distance_distr(gen);
-            std::cout<<"distance "<<distance<<std::endl;
 
-            std::cout<<"potential "<<distance*minerals<<std::endl;
 
-            chamber_ID=m_tunnel_ID*10+m_num_chambers;
+            chamber_ID=m_tunnel_ID*100+m_num_chambers;
             m_tunnel->smart_insert_node(new Chamber(minerals,distance,chamber_ID),minerals*distance);
             distance_counter=distance_counter-distance;
         }
@@ -58,7 +54,6 @@ public:
     AVL_Tree<Chamber>* get_tunnel(){
         return m_tunnel;
     }
-
 };
 
 #endif
