@@ -38,7 +38,9 @@ public:
         t_node->get_left()->set_parent(t_node->get_parent());
         t_node->set_parent(t_node->get_left());
         t_node->set_left(t_node->get_parent()->get_right());
-        t_node->get_left()->set_parent(t_node);
+        if(t_node->get_left() != nullptr){
+            t_node->get_left()->set_parent(t_node);
+        }
         t_node->get_parent()->set_right(t_node);
         t_node->set_height( max(height(t_node->get_left()), height(t_node->get_right())) + 1);
         t_node->get_parent()->set_height( max(height(t_node->get_parent()->get_left()),height(t_node->get_parent()->get_right())) + 1);
@@ -49,7 +51,9 @@ public:
         t_node->get_right()->set_parent(t_node->get_parent());
         t_node->set_parent(t_node->get_right());
         t_node->set_right(t_node->get_parent()->get_left());
-        t_node->get_right()->set_parent(t_node);
+        if(t_node->get_right() != nullptr){
+            t_node->get_right()->set_parent(t_node);
+        }
         t_node->get_parent()->set_left(t_node);
         t_node->set_height( max(height(t_node->get_right()), height(t_node->get_left())) + 1);
         t_node->get_parent()->set_height( max(height(t_node->get_parent()->get_right()),height(t_node->get_parent()->get_left())) + 1);
@@ -77,9 +81,8 @@ public:
         return t_node;
     }
 
-    Node<T> *smart_insert_node(T* t_data,int t_key){
+    void smart_insert_node(T* t_data,int t_key){
         m_root=insert_node(m_root,t_data,t_key);
-        return m_root;
     }
     Node<T> *insert_node(Node<T>* t_node,T* t_data,int t_key) {
         if (t_node == nullptr){
@@ -88,7 +91,7 @@ public:
         if (t_key < t_node->get_key()){
             t_node->set_left(insert_node(t_node->get_left(),t_data, t_key));
         }
-        else if (t_key > t_node->get_key()){
+        else if (t_key >= t_node->get_key()){
             t_node->set_right(insert_node(t_node->get_right(),t_data, t_key));
         }
         //not saving same value data...
@@ -96,12 +99,11 @@ public:
             return t_node;
         }
         t_node->set_height(1 + max(height(t_node->get_left()), height(t_node->get_right())));
-        balance_tree(t_node);
-        return t_node;
+        return balance_tree(t_node);;
     }
 
     Node<T>* smart_delete_node(int t_key){
-        delete_node(m_root, t_key);
+        m_root=delete_node(m_root, t_key);
     }
     Node<T>* delete_node(Node<T> *t_node, int t_key) {
         // Find the node and delete it
@@ -136,8 +138,8 @@ public:
             return t_node;
         }
         t_node->set_height(1 + max(height(t_node->get_left()), height(t_node->get_right())));
-        t_node=balance_tree(t_node);
-        return t_node;
+
+        return balance_tree(t_node);
     }
 
     void smart_print_tree(){
@@ -153,7 +155,7 @@ public:
                 std::cout << "L----";
                 t_indent += "|  ";
             }
-            std::cout << t_node->get_key() << std::endl;
+            std::cout << t_node->get_key() <<" data: "<<t_node->get_data()->get_potential()<< std::endl;
             print_tree(t_node->get_left(), t_indent, false);
             print_tree(t_node->get_right(), t_indent, true);
         }

@@ -5,29 +5,29 @@
 
 class Chamber {
 private:
-    int minerals;
-    int distance_from_root;
-    int potential;
-    int cham_ID;
+    int m_minerals;
+    int m_distance;
+    int m_potential;
+    int m_chamber_ID;
 public:
-    Chamber(int pminerals, int pdistance, int pcham_ID) {
-        minerals = pminerals;
-        distance_from_root = pdistance;
-        potential=pminerals*pdistance;
-        cham_ID=pcham_ID;
+    Chamber(int t_minerals, int t_distance, int t_chamber_ID) {
+        m_minerals = t_minerals;
+        m_distance = t_distance;
+        m_potential=t_minerals*t_distance;
+        m_chamber_ID=t_chamber_ID;
     }
 
-    int Get_Minerals() {
-        return minerals;
+    int get_minerals() {
+        return m_minerals;
     }
-    int Get_Distance() {
-        return distance_from_root;
+    int get_distance() {
+        return m_distance;
     }
-    int Get_Potential() {
-        return potential;
+    int get_potential() {
+        return m_potential;
     }
-    int Get_ID() {
-        return cham_ID;
+    int get_ID() {
+        return m_chamber_ID;
     }
 };
 #endif
