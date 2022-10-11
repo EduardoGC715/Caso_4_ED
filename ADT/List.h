@@ -1,4 +1,5 @@
 # pragma once
+# include <mutex>
 # include "Node.h"
 # include "Stack.h"
 # include "Queue.h"
@@ -8,6 +9,7 @@
 template<typename T>
 class List: public Stack<T>, public Queue<T> {
     private:
+        mutex mtx;
         Node<T>* head;
         Node<T>* tail;
         int size;
@@ -41,7 +43,7 @@ class List: public Stack<T>, public Queue<T> {
 
         void clear() {
             while (! isEmpty()) {
-                remove(0);
+                remove(0);  // Thread-safe call
             }
         }
 
@@ -61,7 +63,9 @@ class List: public Stack<T>, public Queue<T> {
             return tail->data;
         }
 
+        // Thread-safe
         void add(T* pData) {
+            mtx.lock();
             Node<T>* newTail = new Node<T>(pData);
             if (! isEmpty()) {  // Tail Insert for !empty list
                 newTail->prev = tail;
@@ -71,10 +75,13 @@ class List: public Stack<T>, public Queue<T> {
                 head = tail = newTail;
             }
             size++;
+            mtx.unlock();
         }
 
+        // Thread-safe
         void insert(T* pData, int pIndex) {
             if (pIndex < size && head != NULL){
+                mtx.lock();
                 Node<T>* newNode = new Node(pData);    
                 if (pIndex > 0) {   // Inserts at [1, N-1]
                     Node<T>* prior = getNode(pIndex - 1);
@@ -88,21 +95,29 @@ class List: public Stack<T>, public Queue<T> {
                     head = newNode;
                 }
                 size++;
+                mtx.unlock();
             } else {    // Tail Insert if (Empty || Positive OutOfBounds)
                 add(pData);
             }
         }
 
+        // Thread-safe
         T* get(int pIndex) {
+            mtx.lock();
             Node<T>* search = getNode(pIndex);
+            T* result;
             if (search != NULL) {
-                return search->data;
+                result = search->data;
             } else {
-                return NULL;
+                result = NULL;
             }
+            mtx.unlock();
+            return result;
         }
 
+        // Thread-safe
         int find(T* pData) {
+            mtx.lock();
             int index = 0;
             Node<T>* current = head;
             while (current != NULL) {
@@ -112,11 +127,13 @@ class List: public Stack<T>, public Queue<T> {
                 current = current->next;
                 index++;
             }
+            mtx.unlock();
             return NOT_FOUND;
         }
 
-        T* remove(int pIndex)
-        {
+        // Thread-safe
+        T* remove(int pIndex) {
+            mtx.lock();
             T* result = NULL;
             if (pIndex < size && head != NULL) {
                 Node<T>* search = NULL;
@@ -137,6 +154,7 @@ class List: public Stack<T>, public Queue<T> {
                 delete search;
                 size--;
             }
+            mtx.unlock();
             return result;
         }
 
@@ -146,11 +164,11 @@ class List: public Stack<T>, public Queue<T> {
         }
 
         void push(T* pData) {
-            insert(pData, 0);
+            insert(pData, 0); // Thread-safe call
         }
 
         T* pop() {
-            return remove(0);
+            return remove(0); // Thread-safe call
         }
 
         // Queue inheritance
@@ -159,10 +177,10 @@ class List: public Stack<T>, public Queue<T> {
         }
 
         void enqueue(T* pData) {
-            add(pData);
+            add(pData); // Thread-safe call
         }
 
         T* dequeue() {
-            return remove(0);
+            return remove(0); // Thread-safe call
         }
 };
