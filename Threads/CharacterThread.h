@@ -1,53 +1,55 @@
 # pragma once
 # include <chrono>
+# include "../utils/ioUtils.h"
 # include "../Characters/Character.h"
 
-class CharacterThread
-{
-private:
-    bool isRunning;
-    bool isPaused;
-    Character* miner;
-    // Strategy* strategy;
+class CharacterThread {
+    private:
+        int ID;
+        bool isRunning;
+        bool isReady;
+        Character* miner;
 
-    // Comparte punteros deletionQueue y gameMap de GameThread, pues los mineros
-    // navegan en este y pueden colapsar secciones de un tunel
-    // Tree<Door>* gameMap;
-    // Queue<BinaryNode<Chamber>>* deletionQueue;
+        // Comparte punteros deletionQueue y gameMap de GameThread, pues los mineros
+        // navegan en este y pueden colapsar secciones de un tunel
+        // Tree<Door>* gameMap;
+        // Queue<BinaryNode<Chamber>>* deletionQueue;
 
-public:
-    CharacterThread()
-    : isRunning(true), isPaused(true)
-    {}
+    public:
+        CharacterThread()
+        {}
 
-    ~CharacterThread() {
-        delete miner;
-        // delete strategy;
-    }
+        CharacterThread(int pID)
+        : ID(pID), isRunning(true), isReady(false)
+        {}
 
-    void resume() {
-        isPaused = false;
-    }
+        ~CharacterThread() {
+            delete miner;
+        }
 
-    void pause() {
-        isPaused = true;
-    }
+        void resume() {
+            isReady = true;
+        }
 
-    void stop() {
-        isRunning = false;
-    }
+        void pause() {
+            isReady = false;
+        }
 
-    // TODO: Agregar parametro Strategy*
-    void setCharacter(Character* pMiner) {
-        miner = pMiner;
-        //strategy = pStrategy;
-    }
+        void stop() {
+            isRunning = false;
+        }
 
-    void operator() () {
-        while (isRunning) {
-            while (isPaused) {
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+        void setCharacter(Character* pMiner) {
+            miner = pMiner;
+        }
+
+        void operator() () {
+            while (isRunning) {
+                while (! isReady) {
+                    std::this_thread::yield();
+                }
+                printf("CharThread #%d: %s\n", ID, miner->name.c_str());
+                std::this_thread::sleep_for(chrono::seconds(1));
             }
         }
-    }
 };
