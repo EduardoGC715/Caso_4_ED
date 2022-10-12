@@ -31,7 +31,6 @@ public:
 
             std::random_device rd; // obtain a random number from hardware
             std::mt19937 gen(rd()); // seed the generator
-
             std::uniform_int_distribution<> minerals_distr(1,20);// set range
             minerals=minerals_distr(gen); //generate random number
 
@@ -40,7 +39,8 @@ public:
 
 
             chamber_ID=m_tunnel_ID*100+m_num_chambers;
-            m_tunnel->smart_insert_node(new Chamber(minerals,distance,chamber_ID),minerals*distance);
+            auto* chamber= new Chamber(minerals,distance,chamber_ID);
+            m_tunnel->smart_insert_node(chamber,chamber->get_potential());
             distance_counter=distance_counter-distance;
         }
     }

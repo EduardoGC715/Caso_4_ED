@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cstdlib>
 
-//cambiar a nodo generico
 #ifndef ROOM
 #define ROOM
 //change to or adapt to list Node
@@ -12,15 +11,15 @@ private:
     Room* m_doors[4];
     int m_room_ID;
 public:
-    Room(int proom_id){
+    Room(int t_room_ID){
         m_tunnel = nullptr;
         m_doors[0]=nullptr;//North
         m_doors[1]=nullptr;//South
         m_doors[2]=nullptr;//East
         m_doors[3]=nullptr;//West
-        m_room_ID=proom_id;
+        m_room_ID=t_room_ID;
     }
-    void Generate_Tunnel(){
+    void generate_tunnel(){
         std::random_device rd; // obtain a random number from hardware
         std::mt19937 gen(rd()); // seed the generator
         std::uniform_int_distribution<> distr(1, 100);// set range

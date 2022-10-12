@@ -90,16 +90,14 @@ public:
         }
         if (t_key < t_node->get_key()){
             t_node->set_left(insert_node(t_node->get_left(),t_data, t_key));
+            t_node->get_left()->set_parent(t_node);
         }
         else if (t_key >= t_node->get_key()){
             t_node->set_right(insert_node(t_node->get_right(),t_data, t_key));
-        }
-        //not saving same value data...
-        else{
-            return t_node;
+            t_node->get_right()->set_parent(t_node);
         }
         t_node->set_height(1 + max(height(t_node->get_left()), height(t_node->get_right())));
-        return balance_tree(t_node);;
+        return balance_tree(t_node);
     }
 
     Node<T>* smart_delete_node(int t_key){
@@ -155,10 +153,13 @@ public:
                 std::cout << "L----";
                 t_indent += "|  ";
             }
-            std::cout << t_node->get_key() <<" data: "<<"min:"<<t_node->get_data()->get_minerals()<<" dist:"<<t_node->get_data()->get_distance()<<" pot:"<<t_node->get_data()->get_potential()<<" ID:"<<t_node->get_data()->get_ID()<< std::endl;
+            std::cout <<"height: "<<t_node->get_height()<<" key: "<< t_node->get_key() <<" data-> "<<"min:"<<t_node->get_data()->get_minerals()<<" dist:"<<t_node->get_data()->get_distance()<<" pot:"<<t_node->get_data()->get_potential()<<" ID:"<<t_node->get_data()->get_ID()<< std::endl;
             print_tree(t_node->get_left(), t_indent, false);
             print_tree(t_node->get_right(), t_indent, true);
         }
+    }
+    Node<T>* get_root(){
+        return m_root;
     }
 };
 #endif
