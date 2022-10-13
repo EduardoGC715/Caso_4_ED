@@ -2,5 +2,5 @@
 
 class Skill {
     public:
-        virtual void executeSkill();
+        virtual void executeSkill() = 0;
 };

@@ -19,5 +19,8 @@ int main() {
     GameThread game(PLAYERS, DURATION, MINERS, miners, strats);
     thread gameThread(ref(game));
     gameThread.join();
+    
+    delete miners;
+    delete strats;
     return 0;
 }

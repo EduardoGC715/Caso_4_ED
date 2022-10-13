@@ -8,8 +8,8 @@
 # include "../utils/ioUtils.h"
 
 // TODO: Reemplazar los includes siguientes con solucion de Eduardo
-# include "../ADT/Tree.h"
-# include "../Demo/Door.h"
+// # include "../ADT/Tree.h"
+// # include "../Demo/Door.h"
 
 using namespace std;
 
@@ -81,7 +81,7 @@ class GameThread {
 
         void initSubthreads() {
             for (int index = 0; index < CREW_SIZE; ++index) {
-                thread_objs[index] = *new CharacterThread(index+1);
+                thread_objs[index] = CharacterThread(index+1);
                 sub_threads[index] = thread( ref(thread_objs[index]) );
             }
         }
@@ -101,6 +101,8 @@ class GameThread {
                         // Remove deletionQueue.dequeue() from map
                     }
                 }
+                timeManager->join(); delete timeManager;
+                inputThread->join(); delete inputThread;
                 pauseAll();
                 printf("\n");
             }

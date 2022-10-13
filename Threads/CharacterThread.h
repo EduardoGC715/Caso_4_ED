@@ -20,7 +20,7 @@ class CharacterThread {
         {}
 
         CharacterThread(int pID)
-        : ID(pID), isRunning(true), isReady(false)
+        : ID(pID), isRunning(true), isReady(false), miner(nullptr)
         {}
 
         ~CharacterThread() {
