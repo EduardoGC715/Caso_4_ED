@@ -3,8 +3,7 @@
 
 struct Explorer: public Character {
     public:
-        Explorer()
-        : Character(8, 20) {
+        Explorer() : Character(8, 20) {
             name = "Explorer";
         }
 

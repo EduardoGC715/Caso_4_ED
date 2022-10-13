@@ -5,9 +5,10 @@
 using namespace std;
 
 struct Character {
-    private:
+    protected:
         const int maxLoad;
         Strategy* strategy;
+        State state;
 
     public:
         string name;
@@ -24,4 +25,23 @@ struct Character {
 
         virtual Character* clone() = 0;
 
+        virtual void executeStrategy() {
+            switch (state) {
+                case SEARCH:
+                    strategy->searchTunnel(); break;
+
+                case UNDERGROUND:
+                    strategy->searchChamber(); break;
+
+                case MINING:
+                    strategy->mineChamber(); break;
+
+                case RETRIEVE:
+                    strategy->retrieveMineral(); break;
+
+                case UNAVAILABLE:
+                default:
+                    break;
+            }
+        }
 };

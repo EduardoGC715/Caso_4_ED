@@ -3,9 +3,7 @@
 
 struct Freighter: public Character {
     public:
-        Freighter()
-        : Character(40, 10)
-        {
+        Freighter() : Character(40, 10) {
             name = "Freighter";
         }
 
