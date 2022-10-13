@@ -1,7 +1,7 @@
 # pragma once
 # include <iostream>
 # include <chrono>
-# include "../ADT/List.h"
+# include "../../ADT/List.h"
 
 using namespace std;
 
@@ -18,18 +18,18 @@ class IntConsumer {
         }
 
         void operator() (Queue<int>* pQueue) {
-            cout << "Dequeue Thread Start!" << endl;
+            printf("Dequeue Thread Start!\n");
             while (isRunning) {
                 while (pQueue->isEmpty()) {
                     this_thread::sleep_for(chrono::seconds(1));
                 }
                 
-                int* item = pQueue->dequeue();
-                cout << "- Dequeued: " << *item << endl;
+                int* item = pQueue->dequeue_safe();
+                printf("- Dequeued: %d\n", *item);
 
                 this_thread::sleep_for(chrono::seconds(2));
             }
-            cout << "Finished Dequeue" << endl;
+            printf("Finished Dequeue\n");
         }
 
 };

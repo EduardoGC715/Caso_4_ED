@@ -1,7 +1,7 @@
 # pragma once
 # include <iostream>
-# include "../ADT/List.h"
-# include "../ADT/Tree.h"
+# include "../../ADT/List.h"
+# include "../../ADT/Tree.h"
 # include "Door.h"
 
 using namespace std;

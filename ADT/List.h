@@ -9,7 +9,7 @@
 template<typename T>
 class List: public Stack<T>, public Queue<T> {
     private:
-        mutex mtx;
+        std::mutex mtx;
         Node<T>* head;
         Node<T>* tail;
         int size;
@@ -63,9 +63,7 @@ class List: public Stack<T>, public Queue<T> {
             return tail->data;
         }
 
-        // Thread-safe
         void add(T* pData) {
-            mtx.lock();
             Node<T>* newTail = new Node<T>(pData);
             if (! isEmpty()) {  // Tail Insert for !empty list
                 newTail->prev = tail;
@@ -75,13 +73,10 @@ class List: public Stack<T>, public Queue<T> {
                 head = tail = newTail;
             }
             size++;
-            mtx.unlock();
         }
 
-        // Thread-safe
         void insert(T* pData, int pIndex) {
             if (pIndex < size && head != NULL){
-                mtx.lock();
                 Node<T>* newNode = new Node(pData);    
                 if (pIndex > 0) {   // Inserts at [1, N-1]
                     Node<T>* prior = getNode(pIndex - 1);
@@ -95,15 +90,12 @@ class List: public Stack<T>, public Queue<T> {
                     head = newNode;
                 }
                 size++;
-                mtx.unlock();
             } else {    // Tail Insert if (Empty || Positive OutOfBounds)
                 add(pData);
             }
         }
 
-        // Thread-safe
         T* get(int pIndex) {
-            mtx.lock();
             Node<T>* search = getNode(pIndex);
             T* result;
             if (search != NULL) {
@@ -111,13 +103,10 @@ class List: public Stack<T>, public Queue<T> {
             } else {
                 result = NULL;
             }
-            mtx.unlock();
             return result;
         }
 
-        // Thread-safe
         int find(T* pData) {
-            mtx.lock();
             int index = 0;
             Node<T>* current = head;
             while (current != NULL) {
@@ -127,13 +116,10 @@ class List: public Stack<T>, public Queue<T> {
                 current = current->next;
                 index++;
             }
-            mtx.unlock();
             return NOT_FOUND;
         }
 
-        // Thread-safe
         T* remove(int pIndex) {
-            mtx.lock();
             T* result = NULL;
             if (pIndex < size && head != NULL) {
                 Node<T>* search = NULL;
@@ -154,6 +140,39 @@ class List: public Stack<T>, public Queue<T> {
                 delete search;
                 size--;
             }
+            return result;
+        }
+
+        // Thread_Safe List Methods
+        void add_safe(T* pData) {
+            mtx.lock();
+            add(pData);
+            mtx.unlock();
+        }
+
+        void insert_safe(T* pData, int pIndex) {
+            mtx.lock();
+            insert(pData, pIndex);
+            mtx.unlock();
+        }
+
+        T* get_safe(int pIndex) {
+            mtx.lock();
+            T* result = get(pIndex);
+            mtx.unlock();
+            return result;
+        }
+
+        int find_safe(T* pData) {
+            mtx.lock();
+            int result = find(pData);
+            mtx.unlock();
+            return result;
+        }
+
+        T* remove_safe(int pIndex) {
+            mtx.lock();
+            T* result = remove(pIndex);
             mtx.unlock();
             return result;
         }
@@ -164,11 +183,19 @@ class List: public Stack<T>, public Queue<T> {
         }
 
         void push(T* pData) {
-            insert(pData, 0); // Thread-safe call
+            insert(pData, 0);
         }
 
         T* pop() {
-            return remove(0); // Thread-safe call
+            return remove(0);
+        }
+
+        void push_safe(T* pData) {
+            insert_safe(pData, 0);
+        }
+
+        T* pop_safe() {
+            return remove_safe(0);
         }
 
         // Queue inheritance
@@ -177,10 +204,18 @@ class List: public Stack<T>, public Queue<T> {
         }
 
         void enqueue(T* pData) {
-            add(pData); // Thread-safe call
+            add(pData);
         }
 
         T* dequeue() {
-            return remove(0); // Thread-safe call
+            return remove(0);
+        }
+
+        void enqueue_safe(T* pData) {
+            add_safe(pData);
+        }
+
+        T* dequeue_safe() {
+            return remove_safe(0);
         }
 };

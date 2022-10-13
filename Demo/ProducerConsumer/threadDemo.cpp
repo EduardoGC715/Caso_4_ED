@@ -1,5 +1,5 @@
 # include <thread>
-# include "../ADT/List.h"
+# include "../../ADT/List.h"
 # include "ProducerThread.h"
 # include "ConsumerThread.h"
 
@@ -25,7 +25,7 @@ int main() {
     this_thread::sleep_for(chrono::seconds(DEMO_TIME));
     producerObj.stop();
     consumerObj.stop();
-    cout << "\nFinish Test!" << endl;
+    printf("\nFinish Test!\n");
 
     // Waiting for threads to finish
     producerThread.join();

@@ -1,8 +1,8 @@
 # include <iostream>
 # include <ctime>
 
-# include "../ADT/List.h"
-# include "../ADT/Tree.h"
+# include "../../ADT/List.h"
+# include "../../ADT/Tree.h"
 # include "Door.h"
 # include "PathFinder.h"
 
