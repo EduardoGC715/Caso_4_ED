@@ -4,18 +4,18 @@
 #define TREE_NODE
 
 template <class T>
-class Node {
+class Tree_Node {
 
 private:
     T* m_data;
     int m_key;
-    Node* m_left;
-    Node* m_right;
-    Node* m_parent;
+    Tree_Node* m_left;
+    Tree_Node* m_right;
+    Tree_Node* m_parent;
     int m_height;
 
 public:
-    Node(T* t_data,int t_key) {
+    Tree_Node(T* t_data, int t_key) {
         m_data = t_data;
         m_key=t_key;
         m_left = NULL;
@@ -38,24 +38,24 @@ public:
         m_key = t_key;
     }
 
-    Node* get_left(){
+    Tree_Node* get_left(){
         return m_left;
     }
-    void set_left(Node* t_left){
+    void set_left(Tree_Node* t_left){
         m_left = t_left;
     }
 
-    Node* get_right(){
+    Tree_Node* get_right(){
         return m_right;
     }
-    void set_right(Node* t_right){
+    void set_right(Tree_Node* t_right){
         m_right = t_right;
     }
 
-    Node* get_parent(){
+    Tree_Node* get_parent(){
         return m_parent;
     }
-    void set_parent(Node* t_parent){
+    void set_parent(Tree_Node* t_parent){
         m_parent = t_parent;
     }
 
