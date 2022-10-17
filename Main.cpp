@@ -1,13 +1,10 @@
 #include "AVL_Tree.h"
-#include "Tunnel.h"
+#include "Room.h"
 using namespace std;
 
 int main() {
-    auto prueba_tunel = new Tunnel(1);
-
-    prueba_tunel->generate_chambers();
-    cout<<"num chambers:"<<prueba_tunel->get_num_chambers()<<endl;
-    cout<<"Tunnel id:"<<prueba_tunel->get_tunnel_ID()<<endl;
-    prueba_tunel->get_tunnel()->smart_print_tree();
+    auto prueba_habitacion = new Room(1);
+    prueba_habitacion->generate_tunnel();
+    prueba_habitacion->get_tunnel()->get_tunnel()->smart_print_tree();
 
 }

@@ -20,12 +20,24 @@ public:
     int get_minerals() {
         return m_minerals;
     }
+    void set_minerals(int t_minerals){
+        m_minerals = t_minerals;
+    }
+
     int get_distance() {
         return m_distance;
     }
+    void set_distance(int t_distance){
+        m_distance = t_distance;
+    }
+
     int get_potential() {
         return m_potential;
     }
+    void update_potential(){
+        m_potential=m_minerals*m_distance;
+    }
+
     int get_ID() {
         return m_chamber_ID;
     }
