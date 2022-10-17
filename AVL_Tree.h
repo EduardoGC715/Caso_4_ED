@@ -81,65 +81,22 @@ public:
         return t_node;
     }
 
-    Tree_Node<T> *find_space(Tree_Node<T>* t_node, T* t_data, int t_key){
-        if (t_key <= t_node->get_key()){
-            return find_space(t_node->get_left(), t_data, t_key);
-        }
-        else if (t_key > t_node->get_key()){
-            return find_space(t_node->get_right(), t_data, t_key);
-        }
-        else{
-            return t_node;
-        }
-    }
-
     void smart_insert_node(T* t_data,int t_key){
         m_root=insert_node(m_root,t_data,t_key);
     }
     Tree_Node<T> *insert_node(Tree_Node<T>* t_node, T* t_data, int t_key) {
-        Tree_Node<T>* found = find_space(t_node, t_data, t_key);
-
-        found->set_height(1 + max(height(t_node->get_left()), height(t_node->get_right())));
-        return balance_tree(t_node);
-    }
-
-    Tree_Node<T>* smart_delete_node(int t_key){
-        m_root=delete_node(m_root, t_key);
-    }
-    Tree_Node<T>* delete_node(Tree_Node<T> *t_node, int t_key) {
-        // Find the node and delete it
         if (t_node == nullptr){
-            return t_node;
+            return new Tree_Node<T>(t_data, t_key);
         }
-        if (t_key < t_node->get_key()){
-            t_node->set_left(delete_node(t_node->get_left(), t_key));
+        if (t_key <= t_node->get_key()){
+            t_node->set_left(insert_node(t_node->get_left(),t_data, t_key));
+            t_node->get_left()->set_parent(t_node);
         }
         else if (t_key > t_node->get_key()){
-            t_node->set_right(delete_node(t_node->get_right(), t_key));
-        }
-        else {
-            Tree_Node<T>* aux;
-            if ((t_node->get_left() == nullptr) || (t_node->get_right() == nullptr)) {
-                aux = t_node->get_left() ? t_node->get_left() : t_node->get_right();
-                if (aux == nullptr) {
-                    t_node = nullptr;
-                }
-                else {
-                    *t_node = *aux;
-                    free(aux);
-                }
-            }
-            else {
-                aux = node_with_min_value(t_node->get_right());
-                t_node->set_key(aux->get_key());
-                t_node->set_right(delete_node(t_node->get_right(),aux->get_key()));
-            }
-        }
-        if (t_node == nullptr){
-            return t_node;
+            t_node->set_right(insert_node(t_node->get_right(),t_data, t_key));
+            t_node->get_right()->set_parent(t_node);
         }
         t_node->set_height(1 + max(height(t_node->get_left()), height(t_node->get_right())));
-
         return balance_tree(t_node);
     }
 
