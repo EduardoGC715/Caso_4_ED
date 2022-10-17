@@ -76,7 +76,7 @@ public:
                         case 1://south
                             current_point->set_y(current_point->get_y() - 1);
                             found=m_used_coords.find_data_coords(current_point);
-                            if (!m_used_coords.find_data_coords(current_point)) {
+                            if (found==-1) {
 
                                 current_room->set_south(new Room(i));
                                 current_room->get_south()->generate_tunnel();
@@ -97,7 +97,7 @@ public:
                         case 2://east
                             current_point->set_x(current_point->get_x() + 1);
                             found=m_used_coords.find_data_coords(current_point);
-                            if (!m_used_coords.find_data_coords(current_point)) {
+                            if (found==-1) {
 
                                 current_room->set_east(new Room(i));
                                 current_room->get_east()->generate_tunnel();
@@ -118,7 +118,7 @@ public:
                         case 3://west
                             current_point->set_x(current_point->get_x() - 1);
                             found=m_used_coords.find_data_coords(current_point);
-                            if (!m_used_coords.find_data_coords(current_point)) {
+                            if (found==-1) {
 
                                 current_room->set_west(new Room(i));
                                 current_room->get_west()->generate_tunnel();

@@ -49,21 +49,21 @@ public:
         return m_doors[1];
     }
     void set_south(Room* t_south){
-        m_doors[0]=t_south;
+        m_doors[1]=t_south;
     }
 
     Room* get_east(){
         return m_doors[2];
     }
     void set_east(Room* t_east){
-        m_doors[0]=t_east;
+        m_doors[2]=t_east;
     }
 
     Room* get_west(){
         return m_doors[3];
     }
     void set_west(Room* t_west){
-        m_doors[0]=t_west;
+        m_doors[3]=t_west;
     }
 };
 
