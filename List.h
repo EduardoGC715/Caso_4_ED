@@ -43,13 +43,13 @@ public:
         return result;
     }
 
-    bool find_data_coords(Point* t_data){
+    int find_data_coords(Point* t_data){
         for(int i=0; i<m_quantity; i++){
-            if (t_data->compare(find_node(i))){
-                return true;
+            if (t_data->compare_point(find_node(i))){
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
     List_Node<T>* get_first() {
