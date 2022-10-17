@@ -1,50 +1,40 @@
 #include <iostream>
 
 #ifndef NODE
-
 #define NODE 1
 
-using namespace std;
-
-// 1. pasar este nodo a doblemente enlazado
 template <class T>
 class List_Node {
 private:
-    T *data;
-    List_Node *next;
-    List_Node *previous;
+    T *m_data;
+    List_Node *m_next;
+    List_Node *m_previous;
 
 public:
-    List_Node() {
-        data = NULL;
-        next = NULL;
-        previous = NULL;
+    List_Node(T *t_data) {
+        m_data = t_data;
+        m_next = NULL;
+        m_previous = NULL;
     }
 
-    List_Node(T *pData) {
-        this->data = pData;
-        next = NULL;
-        previous = NULL;
+    T* get_data() {
+        return m_data;
     }
 
-    T* getData() {
-        return data;
+    List_Node* get_next() {
+        return m_next;
     }
 
-    List_Node* getNext() {
-        return next;
+    List_Node* get_previous() {
+        return m_previous;
     }
 
-    List_Node* getPrevious() {
-        return previous;
+    void set_next(List_Node *t_value) {
+        m_next = t_value;
     }
 
-    void setNext(List_Node *pValue) {
-        this->next = pValue;
-    }
-
-    void setPrevious(List_Node *pValue) {
-        this->previous = pValue;
+    void set_previous(List_Node *t_value) {
+        m_previous = t_value;
     }
 };
 

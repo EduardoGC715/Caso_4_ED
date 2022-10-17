@@ -6,117 +6,112 @@
 template <class T>
 class List {
 private:
-    List_Node<T> *first;
-    List_Node<T> *last;
-    int quantity;
-    bool empty;
-    List_Node<T> *searchPosition = NULL;
+    List_Node<T> *m_first;
+    List_Node<T> *m_last;
+    int m_quantity;
+    List_Node<T> *searchPosition = nullptr;
 
 public:
     List() {
-        first = NULL;
-        last = NULL;
-        quantity = 0;
-        empty = true;
+        m_first = nullptr;
+        m_last = nullptr;
+        m_quantity = 0;
     }
 
-    void add(T *pData) {
-        List_Node<T> *newNode = new List_Node<T>(pData);
-
-        if (quantity>0) {
-            newNode->setPrevious(last);
-            this->last->setNext(newNode);
+    void add(T *t_data) {
+        auto *new_node = new List_Node<T>(t_data);
+        if (m_quantity > 0) {
+            new_node->set_previous(m_last);
+            m_last->set_next(new_node);
         } else {
-            this->first = newNode;
+            m_first = new_node;
         }
-        this->last = newNode;
-
-        empty = false;
-        quantity++;
+        m_last = new_node;
+        m_quantity++;
     }
 
-    List_Node<T>* getFirst() {
-        return this->first;
+    List_Node<T>* get_first() {
+        m_first;
     }
 
-    int getSize() {
-        return quantity;
+    int get_size() {
+        return m_quantity;
     }
 
-    bool isEmpty() {
-        return !quantity;
+    bool is_empty() {
+        return !m_quantity;
     }
 
-    T* find(int pPosition) {
-        T* result = NULL;
-        searchPosition = this->first;
+    T* find_node(int t_position) {
+        T* result = nullptr;
+        searchPosition = m_first;
 
-        if (pPosition<getSize()) {
-            while(pPosition>0) {
-                searchPosition = searchPosition->getNext();
-                pPosition--;
+        if (t_position < get_size()) {
+            while(t_position > 0) {
+                searchPosition = searchPosition->get_next();
+                t_position--;
             }
-            result = searchPosition->getData();
+            result = searchPosition->get_data();
         }
 
         return result;
     }
 
-    void insert(int pPosition, T *pData) {
+    void insert_node(int t_position, T *t_data) {
 
-        if (pPosition<getSize() && first!=NULL) {
-            List_Node<T> *newNodo = new List_Node<T>(pData);
+        if (t_position < get_size() && m_first != nullptr) {
+            auto *new_node = new List_Node<T>(t_data);
             //Llamado de find para actualizar puntero searchPosition.(No borrar)
-            T* result = find(pPosition);
+            T* result = find_node(t_position);
 
-            newNodo->setNext(searchPosition);
-            if (searchPosition->getPrevious()!=NULL) {
+            new_node->set_next(searchPosition);
+            if (searchPosition->get_previous() != nullptr) {
                 //Anterior a newNodo es el (anterior de searchPosition)
-                newNodo->setPrevious(searchPosition->getPrevious());
+                new_node->set_previous(searchPosition->get_previous());
                 //El siguiente al (anterior de searchPosition) es newNodo
-                searchPosition->getPrevious()->setNext(newNodo);
+                searchPosition->get_previous()->set_next(new_node);
                 //El anterior de searchPosition es NewNodo
-                searchPosition->setPrevious(newNodo);
+                searchPosition->set_previous(new_node);
 
             } else {
-                this->first = newNodo;
+                m_first = new_node;
             }
 
-            quantity++;
+            m_quantity++;
         } else {
-            add(pData);
+            add(t_data);
         }
     }
 
-    bool remove(int pPosition) {
+    bool delete_node(int t_position) {
         bool result = false;
-        if (first!=NULL && pPosition<getSize()) {
-            List_Node<T> *search = first;
-            if (pPosition!=0) {
+        if (m_first!=nullptr && t_position < get_size()) {
+            List_Node<T> *search = m_first;
+            if (t_position != 0) {
                 //Llamado de find para actualizar puntero searchPosition. (No borrar)
 
-                T* data = find(pPosition);
+                T* data = find_node(t_position);
                 //desenlaza *anterior de searchPosition
-                searchPosition->getPrevious()->setNext(searchPosition->getNext());
+                searchPosition->get_previous()->set_next(searchPosition->get_next());
 
-                if (searchPosition==last) {
+                if (searchPosition == m_last) {
                     //Actualiza puntero last.
-                    last = searchPosition->getPrevious();
-                    last->setNext(NULL);
+                    m_last = searchPosition->get_previous();
+                    m_last->set_next(NULL);
                 }
                 else{
                     //Desenlaza *siguiente de searchPosition. Solo si no es el ultimo.
-                    searchPosition->getNext()->setPrevious(searchPosition->getPrevious());
+                    searchPosition->get_next()->set_previous(searchPosition->get_previous());
                 }
-                searchPosition->setNext(NULL);
-                searchPosition->setPrevious(NULL);
+                searchPosition->set_next(NULL);
+                searchPosition->set_previous(NULL);
 
             } else {
-                first = first->getNext();
-                search->setNext(NULL);
+                m_first = m_first->get_next();
+                search->set_next(NULL);
                 delete search;
             }
-            quantity--;
+            m_quantity--;
         }
         return result;
     }
