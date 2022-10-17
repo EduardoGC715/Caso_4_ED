@@ -1,5 +1,5 @@
 #include "List_Node.h"
-
+#include "Point.h"
 #ifndef LIST
 #define LIST 1
 
@@ -42,6 +42,14 @@ public:
         return !m_quantity;
     }
 
+    bool find_node_coords(Point t_point){
+        for(int i=0;i<m_quantity;i++ ){
+            if(find_node(i).compare(t_point)){
+                return true;
+            }
+        }
+    }
+
     T* find_node(int t_position) {
         T* result = nullptr;
         searchPosition = m_first;
@@ -62,7 +70,7 @@ public:
         if (t_position < get_size() && m_first != nullptr) {
             auto *new_node = new List_Node<T>(t_data);
             //Llamado de find para actualizar puntero searchPosition.(No borrar)
-            T* result = find_node(t_position);
+            find_node(t_position);
 
             new_node->set_next(searchPosition);
             if (searchPosition->get_previous() != nullptr) {

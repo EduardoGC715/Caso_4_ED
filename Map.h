@@ -1,5 +1,8 @@
 #include "Room.h"
+#include "Point.h"
+#include "List.h"
 #include <iostream>
+#include <map>
 
 #ifndef MAP
 #define MAP
@@ -22,10 +25,19 @@ public:
     }
 
     void generate_map(){
+        List<Point> used_coords;
+        List<Room> created_rooms;
+
+        used_coords.add(new Point(0,0));
+        created_rooms.add(m_main_room);
+
         Room* current = m_main_room;
         for(int i=2; i<=m_num_rooms;i++){
             switch (random()) {
                 case 0:
+                    if (){
+
+                    }
                     current->set_north(new Room(i));
                     current->get_north()->set_south(current);
                     break;

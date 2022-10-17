@@ -18,6 +18,7 @@ public:
         m_doors[2]=nullptr;//East
         m_doors[3]=nullptr;//West
         m_room_ID=t_room_ID*1000;
+        generate_tunnel()
     }
     void generate_tunnel(){
         std::random_device rd; // obtain a random number from hardware
