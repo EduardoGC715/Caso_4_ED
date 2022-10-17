@@ -28,30 +28,31 @@ public:
         List<Point> used_coords;
         List<Room> created_rooms;
 
-        used_coords.add(new Point(0,0));
-        created_rooms.add(m_main_room);
+        Room* current_room = m_main_room;
+        Point* current_point = new Point(0,0);
 
-        Room* current = m_main_room;
+        used_coords.add(current_point);
+        created_rooms.add(current_room);
+
         for(int i=2; i<=m_num_rooms;i++){
             switch (random()) {
-                case 0:
-                    if (){
+                case 0://north
+                    current_point
 
-                    }
-                    current->set_north(new Room(i));
-                    current->get_north()->set_south(current);
+                    current_room->set_north(new Room(i));
+                    current_room->get_north()->set_south(current_room);
                     break;
-                case 1:
-                    current->set_south(new Room(i));
-                    current->get_south()->set_north(current);
+                case 1://south
+                    current_room->set_south(new Room(i));
+                    current_room->get_south()->set_north(current_room);
                     break;
-                case 2:
-                    current->set_east(new Room(i));
-                    current->get_east()->set_west(current);
+                case 2://east
+                    current_room->set_east(new Room(i));
+                    current_room->get_east()->set_west(current_room);
                     break;
-                case 3:
-                    current->set_west(new Room(i));
-                    current->get_west()->set_east(current);
+                case 3://west
+                    current_room->set_west(new Room(i));
+                    current_room->get_west()->set_east(current_room);
                     break;
             }
         }

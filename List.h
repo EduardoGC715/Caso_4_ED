@@ -43,9 +43,9 @@ public:
         return result;
     }
 
-    bool find_data(T t_data){
+    bool find_data_coords(Point* t_data){
         for(int i=0; i<m_quantity; i++){
-            if (t_data == &find_node(i)){
+            if (t_data->compare(find_node(i))){
                 return true;
             }
         }
