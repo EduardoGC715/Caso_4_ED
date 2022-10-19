@@ -1,4 +1,5 @@
 #include "Tunnel.h"
+#include "../DS/Point.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -10,14 +11,16 @@ private:
     Tunnel* m_tunnel;
     Room* m_doors[4];
     int m_room_ID;
+    Point* m_coords;
 public:
-    Room(int t_room_ID){
+    Room(int t_room_ID,Point* t_coords){
         m_tunnel = nullptr;
         m_doors[0]=nullptr;//North
         m_doors[1]=nullptr;//South
         m_doors[2]=nullptr;//East
         m_doors[3]=nullptr;//West
-        m_room_ID=t_room_ID*1000;
+        m_room_ID=t_room_ID*1;
+        m_coords=t_coords;
     }
     void generate_tunnel(){
         std::random_device rd; // obtain a random number from hardware
@@ -36,6 +39,14 @@ public:
 
     Tunnel* get_tunnel(){
         return m_tunnel;
+    }
+
+    int get_ID(){
+        return m_room_ID;
+    }
+
+    Point* get_coords(){
+        return m_coords;
     }
 
     Room* get_north(){

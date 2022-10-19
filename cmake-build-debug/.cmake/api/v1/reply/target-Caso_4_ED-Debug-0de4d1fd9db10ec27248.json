@@ -121,47 +121,47 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Map.h",
+			"path" : "Map/Map.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Room.h",
+			"path" : "Map/Room.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Tunnel.h",
+			"path" : "Map/Tunnel.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Chamber.h",
+			"path" : "Map/Chamber.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "AVL_Tree.h",
+			"path" : "DS/AVL_Tree.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Tree_Node.h",
+			"path" : "DS/Tree_Node.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "List.h",
+			"path" : "DS/List.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "List_Node.h",
+			"path" : "DS/List_Node.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Point.h",
+			"path" : "DS/Point.h",
 			"sourceGroupIndex" : 1
 		}
 	],

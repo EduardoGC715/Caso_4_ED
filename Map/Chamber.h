@@ -9,12 +9,14 @@ private:
     int m_distance;
     int m_potential;
     int m_chamber_ID;
+    bool m_transitable;
 public:
     Chamber(int t_minerals, int t_distance, int t_chamber_ID) {
         m_minerals = t_minerals;
         m_distance = t_distance;
         m_potential=t_minerals*t_distance;
         m_chamber_ID=t_chamber_ID;
+        m_transitable=true;
     }
 
     int get_minerals() {
@@ -40,6 +42,16 @@ public:
 
     int get_ID() {
         return m_chamber_ID;
+    }
+
+    void mine(){
+        m_minerals--;
+    }
+
+    void update_transitable(){
+        if(m_minerals==0){
+            m_transitable=false;
+        }
     }
 };
 #endif

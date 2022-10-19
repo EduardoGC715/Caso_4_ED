@@ -28,6 +28,11 @@ public:
         m_y = t_y;
     }
 
+    void set_point(Point* t_point){
+        m_x=t_point->get_x();
+        m_y=t_point->get_y();
+    }
+
     bool compare_point(Point* t_point){
         if (t_point->get_x()==m_x && t_point->get_y()==m_y){
             return true;
