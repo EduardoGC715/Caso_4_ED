@@ -1,13 +1,14 @@
 # pragma once
 # include <string>
-# include "../Strategy/Strategy.h"
+# include "CharacterState.h"
+# include "../Strategy/iStrategy.h"
 
 using namespace std;
 
 struct Character {
     protected:
         const int maxLoad;
-        Strategy* strategy;
+        iStrategy* strategy;
         State state;
 
     public:
@@ -19,7 +20,7 @@ struct Character {
         : maxLoad(pMaxLoad), speed(pSpeed), load(0)
         {}
 
-        void setStrategy(Strategy* pStrat) {
+        void setStrategy(iStrategy* pStrat) {
             strategy = pStrat;
         }
 

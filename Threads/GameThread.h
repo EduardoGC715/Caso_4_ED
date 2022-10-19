@@ -14,7 +14,7 @@
 using namespace std;
 
 typedef unordered_map<int, class Character*> minerHash;
-typedef unordered_map<int, Strategy*> stratHash;
+typedef unordered_map<int, iStrategy*> stratHash;
 
 class GameThread;
 void gameTimer(GameThread* pGame);
@@ -49,7 +49,8 @@ class GameThread {
 
         ~GameThread() {
             // delete gameMap;
-            // delete[] subThreads;
+            delete[] thread_objs;
+            delete[] sub_threads;
             // delete deletionQueue;
         }
 
@@ -83,6 +84,7 @@ class GameThread {
             for (int index = 0; index < CREW_SIZE; ++index) {
                 thread_objs[index] = CharacterThread(index+1);
                 sub_threads[index] = thread( ref(thread_objs[index]) );
+                sub_threads[index].detach();
             }
         }
 
@@ -133,21 +135,4 @@ void setup(GameThread* pGame) {
     }
     pGame->isWaiting = false;
     pGame->resumeAll();
-    // Solicita personajes hasta cumplir CREW_SIZE
-    // Por cada personaje, solicita una estrategia
-    // Finalmente, thread_objs[i].setCharacter() y resumeAll()
-
-    // Antes de implementar este metodo, considerar lo siguiente
-    // Crear una libreria simple para menus de texto: ioUtils
-    // Manejar hashes para seleccion de personajes y estrategias. Ej:
-
-        /*  "Interfaz Texto"
-            Seleccione personaje:
-                1. Explorador
-                2. Carguero
-                3. Topo            */
-    
-        /* Donde input valido es un valor en keys: {1, 2, 3} */
-    
-    // Nota importante: Validacion de entradas cin para ints
 }

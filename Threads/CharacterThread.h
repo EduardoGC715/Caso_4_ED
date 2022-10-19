@@ -48,6 +48,7 @@ class CharacterThread {
                 while (! isReady) {
                     std::this_thread::yield();
                 }
+                // miner.executeStrategy()
                 printf("CharThread #%d: %s\n", ID, miner->name.c_str());
                 std::this_thread::sleep_for(chrono::seconds(1));
             }

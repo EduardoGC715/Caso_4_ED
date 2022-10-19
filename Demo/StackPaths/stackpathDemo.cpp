@@ -84,6 +84,6 @@ int main() {
     }
     cout << "\n----------------- _PathFinder_ -----------------" << endl;
 
-    pathFinding(map);
+    pathFindingV2(map);
     return 0;
 }

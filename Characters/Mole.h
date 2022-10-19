@@ -1,8 +1,8 @@
 # pragma once
 # include "Character.h"
-# include "../Strategy/Skill.h"
+# include "../Strategy/iSkill.h"
 
-struct Mole: public Character, public Skill {
+struct Mole: public Character, public iSkill {
     public:
         Mole() : Character(15, 7) {
             name = "Mole";
