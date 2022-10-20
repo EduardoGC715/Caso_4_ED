@@ -1,11 +1,8 @@
 # pragma once
 # include <iostream>
 # include <string>
-# include <mutex>
 
 using namespace std;
-
-mutex io_mutex;
 
 int inputInt(int min, int max) {
     int result;
@@ -27,5 +24,6 @@ int optionMenu(string& pMessage, string* pOptions, int pSize) {
     for (int index = 0; index < pSize; ++index) {
         printf("    %d) %s\n", index+1, pOptions[index].c_str());
     }
-    return inputInt(1, pSize);
+    result = inputInt(1, pSize);
+    return result;
 }

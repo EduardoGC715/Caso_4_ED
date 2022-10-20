@@ -16,10 +16,6 @@ using namespace std;
 typedef unordered_map<int, class Character*> minerHash;
 typedef unordered_map<int, iStrategy*> stratHash;
 
-class GameThread;
-void gameTimer(GameThread* pGame);
-void setup(GameThread* pGame);
-
 class GameThread {
     public:
         const int MAX_PLAYERS;
@@ -83,9 +79,34 @@ class GameThread {
         void initSubthreads() {
             for (int index = 0; index < CREW_SIZE; ++index) {
                 thread_objs[index] = CharacterThread(index+1);
-                sub_threads[index] = thread( ref(thread_objs[index]) );
+                sub_threads[index] = thread{ ref(thread_objs[index]) };
                 sub_threads[index].detach();
             }
+        }
+
+        void timer() {
+            isRunning = true;
+            chrono::seconds time(TURN_DURATION);
+            this_thread::sleep_for(time);
+            isRunning = false;
+        }
+
+        void setup() {
+            int choice;
+            string message;
+            isWaiting = true;
+            for (int index = 0; index < CREW_SIZE; ++index) {
+                message = "Choose class for Miner #" + to_string(index+1);
+                choice = optionMenu(message, str_miners(), miners->size());
+
+                Character* selectedChar = miners->at(choice)->clone();
+                thread_objs[index].setCharacter(selectedChar);
+
+                // message = "Select a strategy";
+                // choice = optionMenu(message, pGame->str_strats(), pGame->strategies->size());
+            }
+            isWaiting = false;
+            resumeAll();
         }
 
         void operator() () {
@@ -94,10 +115,9 @@ class GameThread {
             initSubthreads();
             for (int turn = 0; turn < MAX_PLAYERS; ++turn) {
                 printf("\nPlayer #%d's Turn\n", turn+1);
-                thread* timeManager = new thread(gameTimer, this);
-                thread* inputThread = new thread(setup, this);
-                timeManager->detach();
-                inputThread->detach();
+                thread timeManager{&GameThread::timer, this};
+                thread inputThread{&GameThread::setup, this};
+                
                 while (isRunning) {
                     if (isWaiting) {
                         this_thread::yield();
@@ -105,36 +125,12 @@ class GameThread {
                         // Remove deletionQueue.dequeue() from map
                     }
                 }
-                delete timeManager;
-                delete inputThread;
+                timeManager.detach();
+                inputThread.detach();
+
                 pauseAll();
                 printf("\n");
             }
             stopAll();
         }
 };
-
-void gameTimer(GameThread* pGame) {
-    pGame->isRunning = true;
-    chrono::seconds time(pGame->TURN_DURATION);
-    this_thread::sleep_for(time);
-    pGame->isRunning = false;
-}
-
-void setup(GameThread* pGame) {
-    int choice;
-    string message;
-    pGame->isWaiting = true;
-    for (int index = 0; index < pGame->CREW_SIZE; ++index) {
-        message = "Choose class for Miner #" + to_string(index+1);
-        choice = optionMenu(message, pGame->str_miners(), pGame->miners->size());
-
-        Character* selectedChar = pGame->miners->at(choice)->clone();
-        pGame->thread_objs[index].setCharacter(selectedChar);
-
-        // message = "Select a strategy";
-        // choice = optionMenu(message, pGame->str_strats(), pGame->strategies->size());
-    }
-    pGame->isWaiting = false;
-    pGame->resumeAll();
-}

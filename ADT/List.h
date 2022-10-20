@@ -43,7 +43,7 @@ class List: public Stack<T>, public Queue<T> {
 
         void clear() {
             while (! isEmpty()) {
-                remove(0);  // Thread-safe call
+                remove(0);
             }
         }
 
@@ -77,7 +77,7 @@ class List: public Stack<T>, public Queue<T> {
 
         void insert(T* pData, int pIndex) {
             if (pIndex < size && head != NULL){
-                Node<T>* newNode = new Node(pData);    
+                Node<T>* newNode = new Node<T>(pData);    
                 if (pIndex > 0) {   // Inserts at [1, N-1]
                     Node<T>* prior = getNode(pIndex - 1);
                     Node<T>* after = prior->next;
