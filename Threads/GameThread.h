@@ -87,16 +87,6 @@ class GameThread {
             }
         }
 
-        void timer() {
-            isRunning = true;
-            chrono::seconds delay(1);
-            while (timeLeft >= 0) {
-                this_thread::sleep_for(delay);
-                --timeLeft;
-            }
-            isRunning = false;
-        }
-
         void setup() {
             future<int> choice;
             string message;
@@ -124,24 +114,22 @@ class GameThread {
             printf("Game Start!\n");
             // init gameMap;
             initSubthreads();
-            thread* timeManager = nullptr;
             thread* setupThread = nullptr;
             for (currentTurn = 0; currentTurn < MAX_PLAYERS; ++currentTurn) {
                 printf("\nPlayer #%d's Turn\n", currentTurn+1);
                 timeLeft = TURN_DURATION;
-                timeManager = new thread{&GameThread::timer, this};
-                timeManager->detach();
 
                 setupThread = new thread(&GameThread::setup, this);
                 setupThread->detach();
                 
-                while (isRunning) {
-                    //
+                chrono::seconds delay(1);
+                while (timeLeft >= 0) {
+                    this_thread::sleep_for(delay);
+                    --timeLeft;
                 }
 
                 pauseAll();
                 printf("\n");
-                delete timeManager;
                 delete setupThread;
                 this_thread::sleep_for(chrono::seconds(1));
             }
