@@ -1,22 +1,18 @@
 #include "Chamber.h"
-#include "../DS/AVL_Tree.h"
-#include <iostream>
-#include <random>
+#include "../ADT/AVL_Tree.h"
+#include "../utils/Random.h"
 
 #ifndef TUNNEL
 #define TUNNEL
 
-//cambiar por herencia a AVL tree de tipo rooms...
-class Tunnel {
+class Tunnel :AVL_Tree<Chamber>{
 private:
-    AVL_Tree<Chamber>* m_tunnel;
     int m_max_distance;
     int m_num_chambers;
     int m_tunnel_ID;
 
 public:
     Tunnel(int t_tunnel_ID){
-        m_tunnel = new AVL_Tree<Chamber>();
         m_max_distance=720;
         m_num_chambers=0;
         m_tunnel_ID=t_tunnel_ID;
@@ -30,18 +26,13 @@ public:
         while(distance_counter>0){
             m_num_chambers++;
 
-            std::random_device rd; // obtain a random number from hardware
-            std::mt19937 gen(rd()); // seed the generator
-            std::uniform_int_distribution<> minerals_distr(1,20);// set range
-            minerals=minerals_distr(gen); //generate random number
-
-            std::uniform_int_distribution<> distance_distr(10,80);
-            distance=distance_distr(gen);
+            minerals= random(1,20);
+            distance=random(10,80);
 
 
             chamber_ID=m_tunnel_ID*100+m_num_chambers;
             auto* chamber= new Chamber(minerals,distance,chamber_ID);
-            m_tunnel->smart_insert_node(chamber,chamber->get_potential());
+            smart_insert_node(chamber,chamber->get_potential());
             distance_counter=distance_counter-distance;
         }
     }
@@ -52,8 +43,27 @@ public:
     int get_tunnel_ID(){
         return m_tunnel_ID;
     }
-    AVL_Tree<Chamber>* get_tunnel(){
-        return m_tunnel;
+    Tree_Node<Chamber>* get_tunnel(){
+        return m_root;
+    }
+
+    void smart_print_tree(){
+        print_tree(m_root, "", true);
+    }
+    void print_tree(Tree_Node<Chamber>* t_node, std::string t_indent, bool t_last) {
+        if (t_node != nullptr) {
+            std::cout << t_indent;
+            if (t_last) {
+                std::cout << "R----";
+                t_indent += "   ";
+            } else {
+                std::cout << "L----";
+                t_indent += "|  ";
+            }
+            std::cout <<"height: "<<t_node->get_height()<<" key: "<< t_node->get_key() <<" data-> "<<"min:"<<t_node->get_data()->get_minerals()<<" dist:"<<t_node->get_data()->get_distance()<<" pot:"<<t_node->get_data()->get_potential()<<" ID:"<<t_node->get_data()->get_ID()<< std::endl;
+            print_tree(t_node->get_left(), t_indent, false);
+            print_tree(t_node->get_right(), t_indent, true);
+        }
     }
 };
 

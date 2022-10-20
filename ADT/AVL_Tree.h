@@ -6,7 +6,7 @@
 
 template <class T>
 class AVL_Tree{
-private:
+protected:
     Tree_Node<T>* m_root;
 
 public:
@@ -100,24 +100,6 @@ public:
         return balance_tree(t_node);
     }
 
-    void smart_print_tree(){
-        print_tree(m_root, "", true);
-    }
-    void print_tree(Tree_Node<T>* t_node, std::string t_indent, bool t_last) {
-        if (t_node != nullptr) {
-            std::cout << t_indent;
-            if (t_last) {
-                std::cout << "R----";
-                t_indent += "   ";
-            } else {
-                std::cout << "L----";
-                t_indent += "|  ";
-            }
-            std::cout <<"height: "<<t_node->get_height()<<" key: "<< t_node->get_key() <<" data-> "<<"min:"<<t_node->get_data()->get_minerals()<<" dist:"<<t_node->get_data()->get_distance()<<" pot:"<<t_node->get_data()->get_potential()<<" ID:"<<t_node->get_data()->get_ID()<< std::endl;
-            print_tree(t_node->get_left(), t_indent, false);
-            print_tree(t_node->get_right(), t_indent, true);
-        }
-    }
     Tree_Node<T>* get_root(){
         return m_root;
     }

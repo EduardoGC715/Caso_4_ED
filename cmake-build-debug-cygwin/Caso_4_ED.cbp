@@ -80,19 +80,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/DS/AVL_Tree.h">
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/ADT/AVL_Tree.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/DS/List.h">
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/ADT/List.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/DS/List_Node.h">
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/ADT/List_Node.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/DS/Point.h">
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/ADT/Point.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/DS/Tree_Node.h">
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/ADT/Tree_Node.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Main.cpp">
@@ -108,6 +108,9 @@
 			<Option target="Caso_4_ED"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Tunnel.h">
+			<Option target="Caso_4_ED"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/utils/Random.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/CMakeLists.txt">

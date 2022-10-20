@@ -1,7 +1,5 @@
 #include "Tunnel.h"
-#include "../DS/Point.h"
-#include <iostream>
-#include <cstdlib>
+#include "../ADT/Point.h"
 
 #ifndef ROOM
 #define ROOM
@@ -19,21 +17,18 @@ public:
         m_doors[1]=nullptr;//South
         m_doors[2]=nullptr;//East
         m_doors[3]=nullptr;//West
-        m_room_ID=t_room_ID*1;
+        m_room_ID=t_room_ID;
         m_coords=t_coords;
     }
     void generate_tunnel(){
-        std::random_device rd; // obtain a random number from hardware
-        std::mt19937 gen(rd()); // seed the generator
-        std::uniform_int_distribution<> distr(1, 100);// set range
-        int tunnel_prob = distr(gen); //generate de random number
-        if (tunnel_prob<=66){
-            m_tunnel = new Tunnel(m_room_ID+1);
+        int tunnel_prob = random(0,99);
+        if (tunnel_prob<66){
+            m_tunnel = new Tunnel(m_room_ID);
             m_tunnel->generate_chambers();
 
-            m_tunnel->get_tunnel()->get_root()->get_data()->set_distance(0);
-            m_tunnel->get_tunnel()->get_root()->get_data()->set_minerals(0);
-            m_tunnel->get_tunnel()->get_root()->get_data()->update_potential();
+            m_tunnel->get_tunnel()->get_data()->set_distance(0);
+            m_tunnel->get_tunnel()->get_data()->set_minerals(0);
+            m_tunnel->get_tunnel()->get_data()->update_potential();
         }
     }
 

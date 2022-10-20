@@ -1,7 +1,5 @@
-#include "Room.h"
-#include "../DS/Point.h"
-#include "../DS/List.h"
-#include <iostream>
+#include "../Map/Room.h"
+#include "../ADT/List.h"
 #include <map>
 
 #ifndef MAP
@@ -17,13 +15,6 @@ public:
     Map(int t_rooms){
         m_num_rooms=t_rooms;
         m_main_room= new Room(1,new Point(0,0));
-    }
-    //utilidad pasar a carpeta...
-    int random(int min, int max){
-        std::random_device rd; // obtain a random number from hardware
-        std::mt19937 gen(rd()); // seed the generator
-        std::uniform_int_distribution<> minerals_distr(min,max);// set range
-        return minerals_distr(gen); //generate random number
     }
 
     void generate_map(){
@@ -173,7 +164,7 @@ public:
             if(current->get_tunnel()!=nullptr){
                 std::cout<<"Tiene tunel: "<<current->get_tunnel()->get_tunnel_ID()<<std::endl;
                 std::cout<<"Mapa del tunel: "<<std::endl;
-                current->get_tunnel()->get_tunnel()->smart_print_tree();
+                current->get_tunnel()->smart_print_tree();
             }
         }
     }
