@@ -1,4 +1,4 @@
-#include "Map/Map.h"
+# include "Map/Map.h"
 # include <thread>
 # include "Characters/Explorer.h"
 # include "Characters/Freighter.h"
@@ -8,11 +8,12 @@
 # define PLAYERS 2
 # define DURATION 10
 # define MINERS 3
+# define ROOMS 15
 using namespace std;
 
 //utilizar constantes e implementarlas
 int main() {
-    auto mapa=new Map(15);
+    auto mapa=new Map(ROOMS);
     mapa->generate_map();
     mapa->print_map();
 
