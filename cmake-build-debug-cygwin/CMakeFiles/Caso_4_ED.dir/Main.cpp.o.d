@@ -1,5 +1,5 @@
-CMakeFiles/Caso_4_ED.dir/Main.cpp.o: \
- /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Main.cpp \
+CMakeFiles/Caso_4_ED.dir/main.cpp.o: \
+ /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/main.cpp \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Map.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/../Map/Room.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/../Map/Tunnel.h \
