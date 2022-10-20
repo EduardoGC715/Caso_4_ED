@@ -39,13 +39,13 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/cmake-build-debug-cygwin/
+cmake_ninja_workdir = /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin/
 
 #############################################
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/cmake-build-debug-cygwin && /cygdrive/c/Users/joseg/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/bin/cmake.exe --regenerate-during-build -S/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy -B/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/cmake-build-debug-cygwin
+  COMMAND = cd /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin && /cygdrive/c/Users/joseg/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/bin/cmake.exe --regenerate-during-build -S/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED -B/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -57,7 +57,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/cmake-build-debug-cygwin && /cygdrive/c/Users/joseg/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin && /cygdrive/c/Users/joseg/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -72,7 +72,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 
 build cmake_object_order_depends_target_BGcopy: phony || CMakeFiles/BGcopy.dir
 
-build CMakeFiles/BGcopy.dir/main.cpp.o: CXX_COMPILER__BGcopy_Debug /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/main.cpp || cmake_object_order_depends_target_BGcopy
+build CMakeFiles/BGcopy.dir/main.cpp.o: CXX_COMPILER__BGcopy_Debug /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/main.cpp || cmake_object_order_depends_target_BGcopy
   DEP_FILE = CMakeFiles/BGcopy.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles/BGcopy.dir
@@ -110,7 +110,7 @@ build BGcopy: phony BGcopy.exe
 # =============================================================================
 
 #############################################
-# Folder: /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/cmake-build-debug-cygwin
+# Folder: /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin
 
 build all: phony BGcopy.exe
 

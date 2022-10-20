@@ -42,7 +42,7 @@ rule CXX_EXECUTABLE_LINKER__BGcopy_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /cygdrive/c/Users/joseg/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/bin/cmake.exe --regenerate-during-build -S/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy -B/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/BGcopy/cmake-build-debug-cygwin
+  command = /cygdrive/c/Users/joseg/AppData/Local/JetBrains/CLion2021.3/cygwin_cmake/bin/cmake.exe --regenerate-during-build -S/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED -B/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin
   description = Re-running CMake...
   generator = 1
 
