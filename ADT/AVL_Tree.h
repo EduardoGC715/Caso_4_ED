@@ -27,12 +27,6 @@ public:
             return 0;
         return height(t_node->get_left()) - height(t_node->get_right());
     }
-    /*Tree_Node<T> *node_with_min_value(Tree_Node<T>* t_node) {
-        Tree_Node<T>* current = t_node;
-        while (current->get_left() != NULL)
-            current = current->get_left();
-        return current;
-    }*/
     //hard to explain... needs drawing to fully understand...
     Tree_Node<T>* right_rotate(Tree_Node<T>* t_node) {
         t_node->get_left()->set_parent(t_node->get_parent());
