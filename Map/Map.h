@@ -147,9 +147,9 @@ public:
 
     void print_map(){
 
-        for (auto & rooms : m_rooms)
+        for (int i=1;i<=m_rooms.size();i++)
         {
-            Room*current = rooms.second;
+            Room*current = m_rooms[i];
             std::cout<<"\nHabitacion: "<<current->get_ID()<<std::endl;
             std::cout<<"Coordenadas: "<<current->get_coords()->get_x()<<" , "<<current->get_coords()->get_y()<<std::endl;
 
