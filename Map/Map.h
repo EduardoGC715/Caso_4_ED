@@ -14,11 +14,11 @@ private:
     List<Point> m_used_coords;
     List<Room> m_created_rooms;
 public:
-    Map(){
-        m_num_rooms=10;
+    Map(int t_rooms){
+        m_num_rooms=t_rooms;
         m_main_room= new Room(1,new Point(0,0));
     }
-
+    //utilidad pasar a carpeta...
     int random(int min, int max){
         std::random_device rd; // obtain a random number from hardware
         std::mt19937 gen(rd()); // seed the generator
@@ -33,7 +33,7 @@ public:
         int id=2;
         bool generated=false;
 
-        Room* current_room = m_main_room;
+        Room* current_room;
         auto* current_point = new Point(0,0);
 
         m_used_coords.add(new Point(0,0));
@@ -52,6 +52,7 @@ public:
                         //si no encuentra el punto, esta libre...
                         if (found==-1) {
                             if(id>m_num_rooms){
+                                //condicion de terminado, si la cantidad del id supera el numero de habitaciones no se pueden generar mas...
                                 generated=true;
                                 break;
                             }
@@ -147,7 +148,6 @@ public:
             }
             pos_act++;
         }
-
     }
 
 

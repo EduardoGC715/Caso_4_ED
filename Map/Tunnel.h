@@ -6,6 +6,7 @@
 #ifndef TUNNEL
 #define TUNNEL
 
+//cambiar por herencia a AVL tree de tipo rooms...
 class Tunnel {
 private:
     AVL_Tree<Chamber>* m_tunnel;
