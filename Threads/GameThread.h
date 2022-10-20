@@ -1,6 +1,7 @@
 # pragma once
 # include <thread>
 # include <chrono>
+# include <future>
 # include <unordered_map>
 # include "CharacterThread.h"
 # include "../ADT/List.h"
@@ -24,6 +25,8 @@ class GameThread {
 
         bool isWaiting;
         bool isRunning;
+        int currentTurn;
+        int timeLeft;
 
         // Tree<Door>* gameMap;
         // Queue<BinaryNode<Chamber>>* deletionQueue;
@@ -86,26 +89,34 @@ class GameThread {
 
         void timer() {
             isRunning = true;
-            chrono::seconds time(TURN_DURATION);
-            this_thread::sleep_for(time);
+            chrono::seconds delay(1);
+            while (timeLeft >= 0) {
+                this_thread::sleep_for(delay);
+                --timeLeft;
+            }
             isRunning = false;
         }
 
         void setup() {
-            int choice;
+            future<int> choice;
             string message;
-            isWaiting = true;
             for (int index = 0; index < CREW_SIZE; ++index) {
                 message = "Choose class for Miner #" + to_string(index+1);
-                choice = optionMenu(message, str_miners(), miners->size());
+                choice = async(optionMenu, ref(message), str_miners(), int(miners->size()));
 
-                Character* selectedChar = miners->at(choice)->clone();
+                chrono::seconds span(timeLeft-1);
+                if (choice.wait_for(span) == future_status::timeout) {
+                    printf("Timed Out!\n");
+                    return;
+                }
+
+                Character* selectedChar = miners->at(choice.get())->clone();
+                thread_objs[index].setPlayerID(currentTurn+1);
                 thread_objs[index].setCharacter(selectedChar);
 
                 // message = "Select a strategy";
                 // choice = optionMenu(message, pGame->str_strats(), pGame->strategies->size());
             }
-            isWaiting = false;
             resumeAll();
         }
 
@@ -113,24 +124,28 @@ class GameThread {
             printf("Game Start!\n");
             // init gameMap;
             initSubthreads();
-            for (int turn = 0; turn < MAX_PLAYERS; ++turn) {
-                printf("\nPlayer #%d's Turn\n", turn+1);
-                thread timeManager{&GameThread::timer, this};
-                thread inputThread{&GameThread::setup, this};
+            thread* timeManager = nullptr;
+            thread* setupThread = nullptr;
+            for (currentTurn = 0; currentTurn < MAX_PLAYERS; ++currentTurn) {
+                printf("\nPlayer #%d's Turn\n", currentTurn+1);
+                timeLeft = TURN_DURATION;
+                timeManager = new thread{&GameThread::timer, this};
+                timeManager->detach();
+
+                setupThread = new thread(&GameThread::setup, this);
+                setupThread->detach();
                 
                 while (isRunning) {
-                    if (isWaiting) {
-                        this_thread::yield();
-                    } else {
-                        // Remove deletionQueue.dequeue() from map
-                    }
+                    //
                 }
-                timeManager.detach();
-                inputThread.detach();
 
                 pauseAll();
                 printf("\n");
+                delete timeManager;
+                delete setupThread;
+                this_thread::sleep_for(chrono::seconds(1));
             }
             stopAll();
+            
         }
 };
