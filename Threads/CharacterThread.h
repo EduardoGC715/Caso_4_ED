@@ -5,6 +5,7 @@
 
 class CharacterThread {
     private:
+        int playerID;
         int ID;
         bool isRunning;
         bool isReady;
@@ -25,6 +26,10 @@ class CharacterThread {
 
         ~CharacterThread() {
             delete miner;
+        }
+
+        void setPlayerID(int pPlayer) {
+            playerID = pPlayer;
         }
 
         void resume() {
@@ -49,7 +54,7 @@ class CharacterThread {
                     std::this_thread::yield();
                 }
                 // miner.executeStrategy()
-                printf("CharThread #%d: %s\n", ID, miner->name.c_str());
+                printf("(%d) CharThread #%d: %s\n", playerID,ID, miner->name.c_str());
                 std::this_thread::sleep_for(chrono::seconds(1));
             }
         }
