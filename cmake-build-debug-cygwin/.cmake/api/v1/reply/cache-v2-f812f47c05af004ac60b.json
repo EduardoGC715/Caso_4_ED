@@ -2,42 +2,6 @@
 	"entries" : 
 	[
 		{
-			"name" : "BGcopy_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin"
-		},
-		{
-			"name" : "BGcopy_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "BGcopy_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED"
-		},
-		{
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -843,7 +807,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "BGcopy"
+			"value" : "Caso_4_ED"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1232,6 +1196,42 @@
 			],
 			"type" : "BOOL",
 			"value" : "FALSE"
+		},
+		{
+			"name" : "Caso_4_ED_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin"
+		},
+		{
+			"name" : "Caso_4_ED_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "Caso_4_ED_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED"
 		}
 	],
 	"kind" : "cache",
