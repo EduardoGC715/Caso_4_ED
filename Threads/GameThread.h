@@ -96,6 +96,8 @@ class GameThread {
                 printf("\nPlayer #%d's Turn\n", turn+1);
                 thread* timeManager = new thread(gameTimer, this);
                 thread* inputThread = new thread(setup, this);
+                timeManager->detach();
+                inputThread->detach();
                 while (isRunning) {
                     if (isWaiting) {
                         this_thread::yield();
@@ -103,8 +105,8 @@ class GameThread {
                         // Remove deletionQueue.dequeue() from map
                     }
                 }
-                timeManager->join(); delete timeManager;
-                inputThread->join(); delete inputThread;
+                delete timeManager;
+                delete inputThread;
                 pauseAll();
                 printf("\n");
             }
