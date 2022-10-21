@@ -209,25 +209,25 @@ public:
                 std::cout<<" [N:"<<current->get_north()->get_ID();
             }
             else{
-                std::cout<<" [N:null";
+                std::cout<<" [N:0";
             }
             if (current->get_south()!= nullptr){
                 std::cout<<" ,S:"<<current->get_south()->get_ID();
             }
             else{
-                std::cout<<" ,S:null";
+                std::cout<<" ,S:0";
             }
             if (current->get_east()!= nullptr){
                 std::cout<<" ,E:"<<current->get_east()->get_ID();
             }
             else{
-                std::cout<<" ,E:null";
+                std::cout<<" ,E:0";
             }
             if (current->get_west()!= nullptr){
                 std::cout<<" ,W:"<<current->get_west()->get_ID();
             }
             else{
-                std::cout<<" W:null";
+                std::cout<<" W:0";
             }
             std::cout<<"]\n";
         }
