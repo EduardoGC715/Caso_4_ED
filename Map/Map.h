@@ -145,7 +145,7 @@ public:
     }
 
 
-    void print_map(){
+    void print_map_info(){
 
         for (int i=1;i<=m_rooms.size();i++)
         {
@@ -171,6 +171,37 @@ public:
                 std::cout<<"Mapa del tunel: "<<std::endl;
                 current->get_tunnel()->smart_print_tree();
             }
+        }
+    }
+    void print_graphic_map(){
+        for (int i=1;i<=m_rooms.size();i++){
+            Room*current = m_rooms[i];
+            std::cout<<"#"<<current->get_ID();
+            if (current->get_north()!= nullptr){
+                std::cout<<" [N:"<<current->get_north()->get_ID();
+            }
+            else{
+                std::cout<<" [N:null";
+            }
+            if (current->get_south()!= nullptr){
+                std::cout<<" ,S:"<<current->get_south()->get_ID();
+            }
+            else{
+                std::cout<<" ,S:null";
+            }
+            if (current->get_east()!= nullptr){
+                std::cout<<" ,E:"<<current->get_east()->get_ID();
+            }
+            else{
+                std::cout<<" ,E:null";
+            }
+            if (current->get_west()!= nullptr){
+                std::cout<<" ,W:"<<current->get_west()->get_ID();
+            }
+            else{
+                std::cout<<" W:null";
+            }
+            std::cout<<"]\n";
         }
     }
 
