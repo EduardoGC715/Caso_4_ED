@@ -173,7 +173,35 @@ public:
             }
         }
     }
-    void print_graphic_map(){
+
+    int* get_min_max(){
+        int min_x=0,max_x=0,min_y=0,max_y=0;
+        int current_x=0;
+        int current_y=0;
+        Room*current;
+        for (int i=1;i<=m_rooms.size();i++){
+            current = m_rooms[i];
+            current_x = current->get_coords()->get_x();
+            current_y = current->get_coords()->get_y();
+            if(current_x < min_x){
+                min_x=current_x;
+            }
+            else if(current_x>max_x){
+                max_x=current_x;
+            }
+            if(current_y < min_y){
+                min_y=current_y;
+            }
+            else if(current_y>max_y){
+                max_y=current_y;
+            }
+
+        }
+        static int values[4]={min_x,max_x,min_y,max_y};
+        return values;
+    }
+
+    void print_relations_map(){
         for (int i=1;i<=m_rooms.size();i++){
             Room*current = m_rooms[i];
             std::cout<<"#"<<current->get_ID();
@@ -202,6 +230,45 @@ public:
                 std::cout<<" W:null";
             }
             std::cout<<"]\n";
+        }
+    }
+
+    void print_graphic_map(){
+        Room*current;
+        int* values=get_min_max();
+        int min_x=values[0];
+        int max_x=values[1];
+        int min_y=values[2];
+        int max_y=values[3];
+
+        auto* point_itr = new Point(min_x,max_y);
+
+        bool all = false;
+        bool found;
+
+        while(!all){
+            if(point_itr->get_x()==max_x && point_itr->get_y()==min_y){
+                all=true;
+            }
+            found=false;
+            for (int i=1;i<=m_rooms.size();i++){
+                current = m_rooms[i];
+                if(current->get_coords()->compare_point(point_itr)){
+                    std::cout<<"[ "<<current->get_ID()<<" ] ";
+                    found=true;
+                }
+            }
+            if(!found){
+                std::cout<<"[   ] ";
+            }
+            if(point_itr->get_x()<max_x){
+                point_itr->set_x(point_itr->get_x()+1);
+            }
+            else{
+                std::cout<<std::endl;
+                point_itr->set_x(min_x);
+                point_itr->set_y(point_itr->get_y()-1);
+            }
         }
     }
 
