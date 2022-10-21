@@ -5,14 +5,14 @@
 #ifndef TUNNEL
 #define TUNNEL
 
-class Tunnel :AVL_Tree<Chamber>{
+class Tunnel : AVL_Tree<Chamber> {
 private:
     int m_max_distance;
     int m_num_chambers;
     int m_tunnel_ID;
 
 public:
-    Tunnel(int t_tunnel_ID){
+    Tunnel(int t_tunnel_ID) : AVL_Tree<Chamber>() {
         m_max_distance=720;
         m_num_chambers=0;
         m_tunnel_ID=t_tunnel_ID;
@@ -43,6 +43,7 @@ public:
     int get_tunnel_ID(){
         return m_tunnel_ID;
     }
+
     Tree_Node<Chamber>* get_tunnel(){
         return m_root;
     }

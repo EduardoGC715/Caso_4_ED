@@ -13,13 +13,13 @@ struct Mole: public Character, public iSkill {
         }
 
         void executeStrategy() {
-            switch (state) {
+            switch (strategy->getState()) {
                 case SEARCH:
-                    strategy->searchTunnel(currentRoom, roomOptions, currentPath);
+                    strategy->searchTunnel();
                     break;
 
                 case UNDERGROUND:
-                    strategy->searchChamber(currentPath, pathOptions);
+                    strategy->searchChamber();
                     break;
 
                 case MINING:

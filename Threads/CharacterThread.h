@@ -11,16 +11,12 @@ class CharacterThread {
         bool isReady;
         Character* miner;
 
-        // Comparte punteros deletionQueue y gameMap de GameThread, pues los mineros
-        // navegan en este y pueden colapsar secciones de un tunel
-        Map* gameMap;
-
     public:
         CharacterThread()
         {}
 
-        CharacterThread(int pID, Map* pMap)
-        : ID(pID), isRunning(true), isReady(false), miner(nullptr), gameMap(pMap)
+        CharacterThread(int pID)
+        : ID(pID), isRunning(true), isReady(false), miner(nullptr)
         {}
 
         ~CharacterThread() {
@@ -45,7 +41,6 @@ class CharacterThread {
 
         void setCharacter(Character* pMiner) {
             miner = pMiner;
-            miner->setMap(gameMap);
         }
 
         void operator() () {

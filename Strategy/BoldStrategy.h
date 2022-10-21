@@ -1,17 +1,21 @@
 # pragma once
-# include "../Interfaces/iDeepExpedition.h"
+# include "../Interfaces/iDeepStrategy.h"
 
-class BoldStrategy : public iDeepExpedition {
+class BoldStrategy : public iDeepStrategy {
     public:
         BoldStrategy() {
             name = "Spelunker: Chunk mining, Deep scouting, Early return";
         }
 
+        iStrategy* clone() {
+            return new BoldStrategy;
+        }
+
         void mineChamber() {
-            printf("Spelunky mining\n");
+            printf("Spelunker mining placeholder\n");
         }
 
         void retrieveMineral() {
-            printf("Spelunky retrieval\n");
+            printf("Spelunker retrieval placeholder\n");
         }
 };
