@@ -1,18 +1,19 @@
-#include "Map/Map.h"
 # include <thread>
 # include "Characters/Explorer.h"
 # include "Characters/Freighter.h"
 # include "Characters/Mole.h"
 # include "Threads/GameThread.h"
+# include "Map/Map.h"
 
 # define PLAYERS 2
-# define DURATION 10
-# define MINERS 3
+# define DURATION 20
+# define MINERS 1
+# define ROOMS 15
 using namespace std;
 
 //utilizar constantes e implementarlas
 int main() {
-    auto mapa=new Map(15);
+    auto mapa=new Map(ROOMS);
     mapa->generate_map();
     mapa->print_map();
 
@@ -24,6 +25,7 @@ int main() {
     stratHash* strats = new stratHash;
 
     GameThread game(PLAYERS, DURATION, MINERS, miners, strats);
+    game.setMap(mapa);
     thread gameThread(ref(game));
     gameThread.join();
 
