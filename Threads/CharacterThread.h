@@ -11,11 +11,6 @@ class CharacterThread {
         bool isReady;
         Character* miner;
 
-        // Comparte punteros deletionQueue y gameMap de GameThread, pues los mineros
-        // navegan en este y pueden colapsar secciones de un tunel
-        // Tree<Door>* gameMap;
-        // Queue<BinaryNode<Chamber>>* deletionQueue;
-
     public:
         CharacterThread()
         {}
@@ -53,8 +48,10 @@ class CharacterThread {
                 while (! isReady) {
                     std::this_thread::yield();
                 }
-                // miner.executeStrategy()
-                printf("(%d) CharThread #%d: %s\n", playerID,ID, miner->name.c_str());
+                
+                printf("#%d) %s: ", ID, miner->name.c_str());
+                miner->executeStrategy();
+                // printf("(%d) CharThread #%d: %s\n", playerID,ID, miner->name.c_str());
                 std::this_thread::sleep_for(chrono::seconds(1));
             }
         }

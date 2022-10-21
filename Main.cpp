@@ -1,14 +1,18 @@
-# include "Map/Map.h"
 # include <thread>
 # include "Characters/Explorer.h"
 # include "Characters/Freighter.h"
 # include "Characters/Mole.h"
+# include "Strategy/BoldStrategy.h"
+# include "Strategy/CarefulStrategy.h"
+# include "Strategy/GreedyStrategy.h"
+# include "Strategy/SpitefulStrategy.h"
 # include "Threads/GameThread.h"
+# include "Map/Map.h"
 
 # define PLAYERS 2
-# define DURATION 10
-# define MINERS 3
-# define ROOMS 25
+# define DURATION 40
+# define MINERS 1
+# define ROOMS 15
 using namespace std;
 
 //utilizar constantes e implementarlas
@@ -19,25 +23,23 @@ int main() {
     mapa->print_relations_map();
     mapa->print_graphic_map();
 
-    auto mapa1=new Map(ROOMS);
-    mapa1->generate_map();
-    mapa1->print_map_info();
-    mapa1->print_relations_map();
-    mapa1->print_graphic_map();
-
-/*
     minerHash* miners = new minerHash;
     miners->emplace(1, new Explorer);
     miners->emplace(2, new Freighter);
     miners->emplace(3, new Mole);
 
     stratHash* strats = new stratHash;
+    strats->emplace(1, new BoldStrategy);
+    strats->emplace(2, new CarefulStrategy);
+    strats->emplace(3, new GreedyStrategy);
+    strats->emplace(4, new SpitefulStrategy);
 
     GameThread game(PLAYERS, DURATION, MINERS, miners, strats);
+    game.setMap(mapa);
     thread gameThread(ref(game));
     gameThread.join();
 
     delete miners;
-    delete strats;*/
+    delete strats;
     return 0;
 }

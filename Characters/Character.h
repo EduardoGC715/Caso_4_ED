@@ -1,7 +1,6 @@
 # pragma once
 # include <string>
-# include "CharacterState.h"
-# include "../Strategy/iStrategy.h"
+# include "../Interfaces/iStrategy.h"
 
 using namespace std;
 
@@ -9,7 +8,6 @@ struct Character {
     protected:
         const int maxLoad;
         iStrategy* strategy;
-        State state;
 
     public:
         string name;
@@ -20,19 +18,27 @@ struct Character {
         : maxLoad(pMaxLoad), speed(pSpeed), load(0)
         {}
 
-        void setStrategy(iStrategy* pStrat) {
+        void setStrategy(iStrategy* pStrat, Map* pMap) {
             strategy = pStrat;
+            strategy->init(pMap);
         }
 
         virtual Character* clone() = 0;
 
+        void setMap(Map* pMap) {
+            strategy->init(pMap);
+            
+        }
+
         virtual void executeStrategy() {
-            switch (state) {
+            switch (strategy->getState()) {
                 case SEARCH:
-                    strategy->searchTunnel(); break;
+                    strategy->searchTunnel();
+                    break;
 
                 case UNDERGROUND:
-                    strategy->searchChamber(); break;
+                    strategy->searchChamber();
+                    break;
 
                 case MINING:
                     strategy->mineChamber(); break;

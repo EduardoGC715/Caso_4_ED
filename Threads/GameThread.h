@@ -7,10 +7,7 @@
 # include "../ADT/List.h"
 # include "../ADT/Queue.h"
 # include "../utils/ioUtils.h"
-
-// TODO: Reemplazar los includes siguientes con solucion de Eduardo
-// # include "../ADT/Tree.h"
-// # include "../Demo/Door.h"
+# include "../Map/Map.h"
 
 using namespace std;
 
@@ -28,8 +25,7 @@ class GameThread {
         int currentTurn;
         int timeLeft;
 
-        // Tree<Door>* gameMap;
-        // Queue<BinaryNode<Chamber>>* deletionQueue;
+        Map* gameMap;
         CharacterThread* thread_objs;
         thread* sub_threads;
 
@@ -39,7 +35,6 @@ class GameThread {
         GameThread(int pPlayers, int pDuration, int pCrewSize, minerHash* pMiners, stratHash* pStrats)
         : MAX_PLAYERS(pPlayers), TURN_DURATION(pDuration), CREW_SIZE(pCrewSize) {
             // gameMap = nullptr;
-            // deletionQueue = new List<BinaryNode<Chamber>>;
             thread_objs = new CharacterThread[CREW_SIZE];
             sub_threads = new thread[CREW_SIZE];
             miners = pMiners;
@@ -50,7 +45,10 @@ class GameThread {
             // delete gameMap;
             delete[] thread_objs;
             delete[] sub_threads;
-            // delete deletionQueue;
+        }
+
+        void setMap(Map* pMap) {
+            gameMap = pMap;
         }
 
         string* str_miners() {
@@ -61,9 +59,18 @@ class GameThread {
             return options;
         }
 
+        string* str_strats() {
+            string* options = new string[strategies->size()];
+            for (int key = 1; key <= strategies->size(); ++key) {
+                options[key - 1] = strategies->at(key)->name;
+            }
+            return options;
+        }
+
         void resumeAll() {
             for (int index = 0; index < CREW_SIZE;) {
                 thread_objs[index++].resume();
+                this_thread::sleep_for(chrono::seconds(1));
             }
         }
 
@@ -90,29 +97,41 @@ class GameThread {
         void setup() {
             future<int> choice;
             string message;
+            Character* selectedChar;
+            iStrategy* selectedStrat;
+            chrono::seconds span;
             for (int index = 0; index < CREW_SIZE; ++index) {
+                // Miner input
                 message = "Choose class for Miner #" + to_string(index+1);
                 choice = async(optionMenu, ref(message), str_miners(), int(miners->size()));
-
-                chrono::seconds span(timeLeft-1);
+                span = chrono::seconds(timeLeft);
                 if (choice.wait_for(span) == future_status::timeout) {
                     printf("Timed Out!\n");
                     return;
                 }
+                selectedChar = miners->at(choice.get())->clone();
 
-                Character* selectedChar = miners->at(choice.get())->clone();
+                
+                // Strategy input
+                message = "Select a strategy";
+                choice = async(optionMenu, ref(message), str_strats(), int(strategies->size()));
+                span = chrono::seconds(timeLeft);
+                if (choice.wait_for(span) == future_status::timeout) {
+                    printf("Timed Out!\n");
+                    return;
+                }
+                selectedStrat = strategies->at(choice.get())->clone();
+
+                // Finish setup #index
+                selectedChar->setStrategy(selectedStrat, gameMap);
                 thread_objs[index].setPlayerID(currentTurn+1);
                 thread_objs[index].setCharacter(selectedChar);
-
-                // message = "Select a strategy";
-                // choice = optionMenu(message, pGame->str_strats(), pGame->strategies->size());
             }
             resumeAll();
         }
 
         void operator() () {
             printf("Game Start!\n");
-            // init gameMap;
             initSubthreads();
             thread* setupThread = nullptr;
             for (currentTurn = 0; currentTurn < MAX_PLAYERS; ++currentTurn) {

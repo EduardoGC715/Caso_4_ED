@@ -1,17 +1,21 @@
 # pragma once
-# include "ShallowExpedition.h"
+# include "../Interfaces/iShallowStrategy.h"
 
-class CarefulStrategy : public ShallowExpedition {
+class CarefulStrategy : public iShallowStrategy {
     public:
         CarefulStrategy() {
             name = "Cautious: Chunk mining, Surface scouting, Fill inventory";
         }
 
+        iStrategy* clone() {
+            return new CarefulStrategy;
+        }
+
         void mineChamber() {
-            printf("Mines carefully\n");
+            printf("Cautious mining placeholder\n");
         }
 
         void retrieveMineral() {
-            printf("Retrieves carefully\n");
+            printf("Cautious retrieval placeholder\n");
         }
 };
