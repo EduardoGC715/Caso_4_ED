@@ -145,7 +145,7 @@ public:
     }
 
 
-    void print_map(){
+    void print_map_info(){
 
         for (int i=1;i<=m_rooms.size();i++)
         {
@@ -170,6 +170,121 @@ public:
                 std::cout<<"Tiene tunel: "<<current->get_tunnel()->get_tunnel_ID()<<std::endl;
                 std::cout<<"Mapa del tunel: "<<std::endl;
                 current->get_tunnel()->smart_print_tree();
+            }
+        }
+    }
+
+    struct array
+    {
+        int values[4];
+    };
+
+    array* get_min_max(){
+        int min_x=0,max_x=0,min_y=0,max_y=0;
+        int current_x=0;
+        int current_y=0;
+        Room*current;
+        for (int i=1;i<=m_rooms.size();i++){
+            current = m_rooms[i];
+            current_x = current->get_coords()->get_x();
+            current_y = current->get_coords()->get_y();
+            if(current_x < min_x){
+                min_x=current_x;
+            }
+            else if(current_x>max_x){
+                max_x=current_x;
+            }
+            if(current_y < min_y){
+                min_y=current_y;
+            }
+            else if(current_y>max_y){
+                max_y=current_y;
+            }
+
+        }
+        auto values = new array();
+        values->values[0]=min_x;
+        values->values[1]=max_x;
+        values->values[2]=min_y;
+        values->values[3]=max_y;
+        return values;
+    }
+
+    void print_relations_map(){
+        for (int i=1;i<=m_rooms.size();i++){
+            Room*current = m_rooms[i];
+            std::cout<<"#"<<current->get_ID();
+            if (current->get_north()!= nullptr){
+                std::cout<<" [N:"<<current->get_north()->get_ID();
+            }
+            else{
+                std::cout<<" [N:0";
+            }
+            if (current->get_south()!= nullptr){
+                std::cout<<" ,S:"<<current->get_south()->get_ID();
+            }
+            else{
+                std::cout<<" ,S:0";
+            }
+            if (current->get_east()!= nullptr){
+                std::cout<<" ,E:"<<current->get_east()->get_ID();
+            }
+            else{
+                std::cout<<" ,E:0";
+            }
+            if (current->get_west()!= nullptr){
+                std::cout<<" ,W:"<<current->get_west()->get_ID();
+            }
+            else{
+                std::cout<<" W:0";
+            }
+            std::cout<<"]\n";
+        }
+    }
+
+    void print_graphic_map(){
+        Room*current;
+        auto coords=get_min_max();
+        int min_x=coords->values[0];
+        int max_x=coords->values[1];
+        int min_y=coords->values[2];
+        int max_y=coords->values[3];
+
+        auto* point_itr = new Point(min_x,max_y);
+
+        bool all = false;
+        bool found;
+
+        while(!all){
+            if(point_itr->get_x()==max_x && point_itr->get_y()==min_y){
+                all=true;
+            }
+            found=false;
+            for (int i=1;i<=m_rooms.size();i++){
+                current = m_rooms[i];
+                if(current->get_coords()->compare_point(point_itr)){
+                    if(current->get_ID()<10){
+                        std::cout<<"[00"<<current->get_ID()<<"] ";
+                    }
+                    else if(current->get_ID()<100){
+                        std::cout<<"[0"<<current->get_ID()<<"] ";
+                    }
+                    else{
+                        std::cout<<"["<<current->get_ID()<<"] ";
+                    }
+                    found=true;
+                }
+            }
+            if(!found){
+                std::cout<<"[   ] ";
+            }
+            if(point_itr->get_x()<max_x){
+                point_itr->set_x(point_itr->get_x()+1);
+            }
+            else{
+                std::cout<<std::endl;
+                point_itr->set_x(min_x);
+                point_itr->set_y(point_itr->get_y()-1);
             }
         }
     }
