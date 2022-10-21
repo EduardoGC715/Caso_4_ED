@@ -104,6 +104,9 @@
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/main.cpp">
 			<Option target="Caso_4_ED"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/utils/Max.h">
+			<Option target="Caso_4_ED"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/utils/Random.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>

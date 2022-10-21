@@ -1,6 +1,5 @@
 #include "Tree_Node.h"
-#include <iostream>
-
+#include "../utils/Max.h"
 #ifndef AVL_TREE
 #define AVL_TREE
 
@@ -14,9 +13,6 @@ public:
         m_root = nullptr;
     }
 
-    int max(int t_x, int t_y) {
-        return (t_x > t_y) ? t_x : t_y;
-    }
     int height(Tree_Node<T>* t_node) {
         if (t_node == nullptr)
             return 0;
@@ -27,7 +23,7 @@ public:
             return 0;
         return height(t_node->get_left()) - height(t_node->get_right());
     }
-    //hard to explain... needs drawing to fully understand...
+
     Tree_Node<T>* right_rotate(Tree_Node<T>* t_node) {
         t_node->get_left()->set_parent(t_node->get_parent());
         t_node->set_parent(t_node->get_left());
@@ -40,7 +36,7 @@ public:
         t_node->get_parent()->set_height( max(height(t_node->get_parent()->get_left()),height(t_node->get_parent()->get_right())) + 1);
         return t_node->get_parent();
     }
-    //hard to explain... needs drawing to fully understand...
+
     Tree_Node<T>* left_rotate(Tree_Node<T> *t_node) {
         t_node->get_right()->set_parent(t_node->get_parent());
         t_node->set_parent(t_node->get_right());
@@ -64,7 +60,7 @@ public:
                 return right_rotate(t_node);
             }
         }
-        if (balance_factor < -1) {
+        else if (balance_factor < -1) {
             if (get_balance_factor(t_node->get_right()) <= 0) {
                 return left_rotate(t_node);
             } else {
