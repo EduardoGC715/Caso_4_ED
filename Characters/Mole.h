@@ -1,6 +1,6 @@
 # pragma once
 # include "Character.h"
-# include "../Strategy/iSkill.h"
+# include "../Interfaces/iSkill.h"
 
 struct Mole: public Character, public iSkill {
     public:
@@ -15,10 +15,12 @@ struct Mole: public Character, public iSkill {
         void executeStrategy() {
             switch (state) {
                 case SEARCH:
-                    strategy->searchTunnel(); break;
+                    strategy->searchTunnel(currentRoom, roomOptions, currentPath);
+                    break;
 
                 case UNDERGROUND:
-                    strategy->searchChamber(); break;
+                    strategy->searchChamber(currentPath, pathOptions);
+                    break;
 
                 case MINING:
                     strategy->mineChamber(); break;

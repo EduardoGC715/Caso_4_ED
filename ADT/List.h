@@ -48,19 +48,35 @@ class List: public Stack<T>, public Queue<T> {
         }
 
         const T* getFirst() const {
-            return head->data;
+            if (! isEmpty()) {
+                return head->data;
+            } else {
+                return nullptr;
+            }
         }
 
         const T* getLast() const {
-            return tail->data;
+            if (! isEmpty()) {
+                return tail->data;
+            } else {
+                return nullptr;
+            }
         }
 
         T* getFirst() {
-            return head->data;
+            if (! isEmpty()) {
+                return head->data;
+            } else {
+                return nullptr;
+            }
         }
 
         T* getLast() {
-            return tail->data;
+            if (! isEmpty()) {
+                return tail->data;
+            } else {
+                return nullptr;
+            }
         }
 
         void add(T* pData) {

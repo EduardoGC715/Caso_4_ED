@@ -1,7 +1,7 @@
 # pragma once
-# include "DeepExpedition.h"
+# include "../Interfaces/iDeepExpedition.h"
 
-class BoldStrategy : public DeepExpedition {
+class BoldStrategy : public iDeepExpedition {
     public:
         BoldStrategy() {
             name = "Spelunker: Chunk mining, Deep scouting, Early return";

@@ -7,6 +7,7 @@
 # include "../ADT/List.h"
 # include "../ADT/Queue.h"
 # include "../utils/ioUtils.h"
+# include "../Map/Map.h"
 
 // TODO: Reemplazar los includes siguientes con solucion de Eduardo
 // # include "../ADT/Tree.h"
@@ -28,7 +29,7 @@ class GameThread {
         int currentTurn;
         int timeLeft;
 
-        // Tree<Door>* gameMap;
+        Map* gameMap;
         // Queue<BinaryNode<Chamber>>* deletionQueue;
         CharacterThread* thread_objs;
         thread* sub_threads;
@@ -53,6 +54,10 @@ class GameThread {
             // delete deletionQueue;
         }
 
+        void setMap(Map* pMap) {
+            gameMap = pMap;
+        }
+
         string* str_miners() {
             string* options = new string[miners->size()];
             for (int key = 1; key <= miners->size(); ++key) {
@@ -64,6 +69,7 @@ class GameThread {
         void resumeAll() {
             for (int index = 0; index < CREW_SIZE;) {
                 thread_objs[index++].resume();
+                this_thread::sleep_for(chrono::seconds(1));
             }
         }
 
@@ -81,7 +87,7 @@ class GameThread {
 
         void initSubthreads() {
             for (int index = 0; index < CREW_SIZE; ++index) {
-                thread_objs[index] = CharacterThread(index+1);
+                thread_objs[index] = CharacterThread(index+1, gameMap);
                 sub_threads[index] = thread{ ref(thread_objs[index]) };
                 sub_threads[index].detach();
             }
@@ -112,7 +118,6 @@ class GameThread {
 
         void operator() () {
             printf("Game Start!\n");
-            // init gameMap;
             initSubthreads();
             thread* setupThread = nullptr;
             for (currentTurn = 0; currentTurn < MAX_PLAYERS; ++currentTurn) {

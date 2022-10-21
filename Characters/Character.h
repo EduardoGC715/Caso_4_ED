@@ -1,7 +1,7 @@
 # pragma once
 # include <string>
 # include "CharacterState.h"
-# include "../Strategy/iStrategy.h"
+# include "../Interfaces/iStrategy.h"
 
 using namespace std;
 
@@ -11,14 +11,25 @@ struct Character {
         iStrategy* strategy;
         State state;
 
+        List<Room>* currentRoom;
+        List<RandOption>* roomOptions;
+
+        List<Path>* currentPath;
+        List<RandOption>* pathOptions;
+
     public:
         string name;
         int speed;
         int load;
 
         Character(const int pMaxLoad, int pSpeed)
-        : maxLoad(pMaxLoad), speed(pSpeed), load(0)
-        {}
+        : maxLoad(pMaxLoad), state(SEARCH), speed(pSpeed), load(0)
+        {
+            currentRoom = new List<Room>;
+            roomOptions = new List<RandOption>;
+            currentPath = new List<Path>;
+            pathOptions = new List<RandOption>;
+        }
 
         void setStrategy(iStrategy* pStrat) {
             strategy = pStrat;
@@ -26,13 +37,20 @@ struct Character {
 
         virtual Character* clone() = 0;
 
+        void setMap(Map* pMap) {
+            currentRoom->push(pMap->get_main_room());
+            roomOptions->push(new RandOption(4));
+        }
+
         virtual void executeStrategy() {
             switch (state) {
                 case SEARCH:
-                    strategy->searchTunnel(); break;
+                    strategy->searchTunnel(currentRoom, roomOptions, currentPath);
+                    break;
 
                 case UNDERGROUND:
-                    strategy->searchChamber(); break;
+                    strategy->searchChamber(currentPath, pathOptions);
+                    break;
 
                 case MINING:
                     strategy->mineChamber(); break;

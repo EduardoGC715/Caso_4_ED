@@ -1,7 +1,7 @@
 # pragma once
-# include "ShallowExpedition.h"
+# include "../Interfaces/iShallowExpedition.h"
 
-class SpitefulStrategy : public ShallowExpedition {
+class SpitefulStrategy : public iShallowExpedition {
     public:
         SpitefulStrategy(/* args */) {
             name = "Spiteful: Full mining, Surface scouting, Fill inventory";
