@@ -1,1 +1,1 @@
-/usr/bin/c++.exe -g -Wl,--enable-auto-import CMakeFiles/Caso_4_ED.dir/Main.cpp.o -o Caso_4_ED.exe -Wl,--out-implib,libCaso_4_ED.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+/usr/bin/c++.exe -g -Wl,--enable-auto-import CMakeFiles/Caso_4_ED.dir/main.cpp.o -o Caso_4_ED.exe -Wl,--out-implib,libCaso_4_ED.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

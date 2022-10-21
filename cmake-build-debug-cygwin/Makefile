@@ -129,29 +129,29 @@ Caso_4_ED/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/build
 .PHONY : Caso_4_ED/fast
 
-Main.o: Main.cpp.o
-.PHONY : Main.o
+main.o: main.cpp.o
+.PHONY : main.o
 
 # target to build an object file
-Main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/Main.cpp.o
-.PHONY : Main.cpp.o
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-Main.i: Main.cpp.i
-.PHONY : Main.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-Main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/Main.cpp.i
-.PHONY : Main.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-Main.s: Main.cpp.s
-.PHONY : Main.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-Main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/Main.cpp.s
-.PHONY : Main.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Caso_4_ED.dir/build.make CMakeFiles/Caso_4_ED.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Caso_4_ED"
-	@echo "... Main.o"
-	@echo "... Main.i"
-	@echo "... Main.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

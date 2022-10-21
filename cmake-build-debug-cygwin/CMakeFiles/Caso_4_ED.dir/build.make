@@ -69,28 +69,28 @@ include CMakeFiles/Caso_4_ED.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Caso_4_ED.dir/flags.make
 
-CMakeFiles/Caso_4_ED.dir/Main.cpp.o: CMakeFiles/Caso_4_ED.dir/flags.make
-CMakeFiles/Caso_4_ED.dir/Main.cpp.o: ../Main.cpp
-CMakeFiles/Caso_4_ED.dir/Main.cpp.o: CMakeFiles/Caso_4_ED.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Caso_4_ED.dir/Main.cpp.o"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Caso_4_ED.dir/Main.cpp.o -MF CMakeFiles/Caso_4_ED.dir/Main.cpp.o.d -o CMakeFiles/Caso_4_ED.dir/Main.cpp.o -c /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Main.cpp
+CMakeFiles/Caso_4_ED.dir/main.cpp.o: CMakeFiles/Caso_4_ED.dir/flags.make
+CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Caso_4_ED.dir/main.cpp.o: CMakeFiles/Caso_4_ED.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Caso_4_ED.dir/main.cpp.o"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Caso_4_ED.dir/main.cpp.o -MF CMakeFiles/Caso_4_ED.dir/main.cpp.o.d -o CMakeFiles/Caso_4_ED.dir/main.cpp.o -c /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/main.cpp
 
-CMakeFiles/Caso_4_ED.dir/Main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Caso_4_ED.dir/Main.cpp.i"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Main.cpp > CMakeFiles/Caso_4_ED.dir/Main.cpp.i
+CMakeFiles/Caso_4_ED.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Caso_4_ED.dir/main.cpp.i"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/main.cpp > CMakeFiles/Caso_4_ED.dir/main.cpp.i
 
-CMakeFiles/Caso_4_ED.dir/Main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Caso_4_ED.dir/Main.cpp.s"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Main.cpp -o CMakeFiles/Caso_4_ED.dir/Main.cpp.s
+CMakeFiles/Caso_4_ED.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Caso_4_ED.dir/main.cpp.s"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/main.cpp -o CMakeFiles/Caso_4_ED.dir/main.cpp.s
 
 # Object files for target Caso_4_ED
 Caso_4_ED_OBJECTS = \
-"CMakeFiles/Caso_4_ED.dir/Main.cpp.o"
+"CMakeFiles/Caso_4_ED.dir/main.cpp.o"
 
 # External object files for target Caso_4_ED
 Caso_4_ED_EXTERNAL_OBJECTS =
 
-Caso_4_ED.exe: CMakeFiles/Caso_4_ED.dir/Main.cpp.o
+Caso_4_ED.exe: CMakeFiles/Caso_4_ED.dir/main.cpp.o
 Caso_4_ED.exe: CMakeFiles/Caso_4_ED.dir/build.make
 Caso_4_ED.exe: CMakeFiles/Caso_4_ED.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/cmake-build-debug-cygwin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Caso_4_ED.exe"
