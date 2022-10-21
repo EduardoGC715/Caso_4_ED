@@ -174,7 +174,12 @@ public:
         }
     }
 
-    int* get_min_max(){
+    struct array
+    {
+        int values[4];
+    };
+
+    array* get_min_max(){
         int min_x=0,max_x=0,min_y=0,max_y=0;
         int current_x=0;
         int current_y=0;
@@ -197,7 +202,11 @@ public:
             }
 
         }
-        static int values[4]={min_x,max_x,min_y,max_y};
+        auto values = new array();
+        values->values[0]=min_x;
+        values->values[1]=max_x;
+        values->values[2]=min_y;
+        values->values[3]=max_y;
         return values;
     }
 
@@ -235,11 +244,11 @@ public:
 
     void print_graphic_map(){
         Room*current;
-        int* values=get_min_max();
-        int min_x=values[0];
-        int max_x=values[1];
-        int min_y=values[2];
-        int max_y=values[3];
+        auto coords=get_min_max();
+        int min_x=coords->values[0];
+        int max_x=coords->values[1];
+        int min_y=coords->values[2];
+        int max_y=coords->values[3];
 
         auto* point_itr = new Point(min_x,max_y);
 
@@ -254,7 +263,15 @@ public:
             for (int i=1;i<=m_rooms.size();i++){
                 current = m_rooms[i];
                 if(current->get_coords()->compare_point(point_itr)){
-                    std::cout<<"[ "<<current->get_ID()<<" ] ";
+                    if(current->get_ID()<10){
+                        std::cout<<"[00"<<current->get_ID()<<"] ";
+                    }
+                    else if(current->get_ID()<100){
+                        std::cout<<"[0"<<current->get_ID()<<"] ";
+                    }
+                    else{
+                        std::cout<<"["<<current->get_ID()<<"] ";
+                    }
                     found=true;
                 }
             }
