@@ -103,8 +103,7 @@
 				6,
 				7,
 				8,
-				9,
-				10
+				9
 			]
 		}
 	],
@@ -159,11 +158,6 @@
 		{
 			"backtrace" : 1,
 			"path" : "utils/Max.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "Map/Map_Builder.h",
 			"sourceGroupIndex" : 1
 		}
 	],
