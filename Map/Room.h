@@ -44,33 +44,11 @@ public:
         return m_coords;
     }
 
-    Room* get_north(){
-        return m_doors[0];
+    Room* get_direction(int t_dir){
+        return m_doors[t_dir];
     }
-    void set_north(Room* t_north){
-        m_doors[0]=t_north;
-    }
-
-    Room* get_south(){
-        return m_doors[1];
-    }
-    void set_south(Room* t_south){
-        m_doors[1]=t_south;
-    }
-
-    Room* get_east(){
-        return m_doors[2];
-    }
-    void set_east(Room* t_east){
-        m_doors[2]=t_east;
-    }
-
-    Room* get_west(){
-        return m_doors[3];
-    }
-    void set_west(Room* t_west){
-        m_doors[3]=t_west;
+    void set_direction(int t_dir, Room* t_room){
+        m_doors[t_dir]=t_room;
     }
 };
-
 #endif

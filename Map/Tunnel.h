@@ -16,6 +16,7 @@ public:
         m_max_distance=720;
         m_num_chambers=0;
         m_tunnel_ID=t_tunnel_ID;
+        generate_chambers();
     }
 
     void generate_chambers(){
