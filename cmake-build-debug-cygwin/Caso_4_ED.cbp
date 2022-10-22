@@ -95,9 +95,6 @@
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Map.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Map_Builder.h">
-			<Option target="Caso_4_ED"/>
-		</Unit>
 		<Unit filename="/cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Room.h">
 			<Option target="Caso_4_ED"/>
 		</Unit>

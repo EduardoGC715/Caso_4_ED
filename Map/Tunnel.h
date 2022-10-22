@@ -30,7 +30,6 @@ public:
             minerals= random(1,20);
             distance=random(10,80);
 
-
             chamber_ID=m_tunnel_ID*100+m_num_chambers;
             auto* chamber= new Chamber(minerals,distance,chamber_ID);
             smart_insert_node(chamber,chamber->get_potential());

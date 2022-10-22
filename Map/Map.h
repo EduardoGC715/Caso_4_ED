@@ -83,9 +83,7 @@ public:
         }
     }
 
-
     void print_map_info(){
-
         for (int i=1;i<=m_rooms.size();i++)
         {
             Room*current = m_rooms[i];
@@ -139,7 +137,6 @@ public:
             else if(current_y>max_y){
                 max_y=current_y;
             }
-
         }
         auto values = new array();
         values->values[0]=min_x;
