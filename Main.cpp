@@ -10,9 +10,9 @@
 # include "Map/Map.h"
 
 # define PLAYERS 2
-# define DURATION 40
+# define DURATION 120
 # define MINERS 1
-# define ROOMS 15
+# define ROOMS 6
 using namespace std;
 
 //utilizar constantes e implementarlas

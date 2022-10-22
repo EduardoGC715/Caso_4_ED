@@ -26,9 +26,9 @@ public:
             m_tunnel = new Tunnel(m_room_ID);
             m_tunnel->generate_chambers();
 
-            m_tunnel->get_tunnel()->get_data()->set_distance(0);
-            m_tunnel->get_tunnel()->get_data()->set_minerals(0);
-            m_tunnel->get_tunnel()->get_data()->update_potential();
+            m_tunnel->get_entrance()->get_data()->set_distance(0);
+            m_tunnel->get_entrance()->get_data()->set_minerals(0);
+            m_tunnel->get_entrance()->get_data()->update_potential();
         }
     }
 

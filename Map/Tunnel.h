@@ -43,8 +43,7 @@ public:
     int get_tunnel_ID(){
         return m_tunnel_ID;
     }
-
-    Tree_Node<Chamber>* get_tunnel(){
+    Tree_Node<Chamber>* get_entrance(){
         return m_root;
     }
 

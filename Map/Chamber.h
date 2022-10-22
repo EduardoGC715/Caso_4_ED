@@ -48,6 +48,10 @@ public:
         m_minerals--;
     }
 
+    bool is_transitable() {
+        return m_transitable;
+    }
+
     void update_transitable(){
         if(m_minerals==0){
             m_transitable=false;
