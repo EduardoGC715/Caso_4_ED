@@ -1,5 +1,5 @@
 #include "Room.h"
-
+#include <unordered_map>
 #ifndef MAP
 #define MAP
 
@@ -24,15 +24,30 @@ public:
         return -1;
     }
 
+    int find_key(int t_value,std::unordered_map<int,int> t_map){
+        for(int i = 0; i <= m_rooms.size(); i++){
+            if (t_map[i]==t_value){
+                return i;
+            }
+        }
+    }
+
     void generate_map(){
-        int doors;
+        int num_doors;
         int id = 2;
         int aux_itr = 1;
+
         int found;
         bool gen_map = false;
+
         int rand_dir;
-        int directions[4]={1,-1,2,-2};
         int dir_room;
+
+        std::unordered_map<int,int> directions;
+        directions[0]=1;
+        directions[1]=-1;
+        directions[2]=2;
+        directions[3]=-2;
 
         Room* current_room;
         Point* current_point;
@@ -41,10 +56,12 @@ public:
         m_rooms[1]=m_main_room;
 
         while(!gen_map){
-            doors = random(2,4);
-            for(int gen_doors=0;gen_doors<doors;gen_doors++){
+            num_doors = random(2,4);
+            for(int doors=0;doors<num_doors;doors++){
+
                 current_room = m_rooms[aux_itr];
                 current_point= current_room->get_coords();
+                aux_point->set_point(current_point);
 
                 rand_dir=random(0,3);
                 dir_room=directions[rand_dir];
@@ -61,15 +78,16 @@ public:
                         gen_map=true;
                         break;
                     }
-                    current_room->get_doors()[dir_room]=new Room(id, new Point(aux_point->get_x(), aux_point->get_y()));
-                    current_room->get_doors()[dir_room]->get_doors()[dir_room*-1]=current_room;
+                    int a=find_key(dir_room*-1,directions);
+                    current_room->set_direction(rand_dir,new Room(id, new Point(aux_point->get_x(), aux_point->get_y())));
+                    current_room->get_direction(rand_dir)->set_direction(find_key(dir_room*-1,directions),current_room);
 
-                    m_rooms[id]=current_room->get_doors()[dir_room];
+                    m_rooms[id]=current_room->get_direction(rand_dir);
                     id++;
                 }
                 else{
-                    current_room->get_doors()[dir_room]=m_rooms[found];
-                    m_rooms[found]->get_doors()[dir_room*-1]=current_room;
+                    current_room->set_direction(rand_dir,m_rooms[found]);
+                    m_rooms[found]->set_direction(find_key(dir_room*-1,directions),current_room);
                 }
             }
             aux_itr++;
@@ -85,17 +103,17 @@ public:
             std::cout<<"\nHabitacion: "<<current->get_ID()<<std::endl;
             std::cout<<"Coordenadas: "<<current->get_coords()->get_x()<<" , "<<current->get_coords()->get_y()<<std::endl;
 
-            if (current->get_north()!= nullptr){
-                std::cout<<"Conectada al norte con: "<<current->get_north()->get_ID()<<std::endl;
+            if (current->get_direction(0)!= nullptr){
+                std::cout<<"Conectada al norte con: "<<current->get_direction(0)->get_ID()<<std::endl;
             }
-            if(current->get_south()!= nullptr){
-                std::cout<<"Conectada al sur con: "<<current->get_south()->get_ID()<<std::endl;
+            if(current->get_direction(1)!= nullptr){
+                std::cout<<"Conectada al sur con: "<<current->get_direction(1)->get_ID()<<std::endl;
             }
-            if(current->get_east()!= nullptr){
-                std::cout<<"Conectada al este con: "<<current->get_east()->get_ID()<<std::endl;
+            if(current->get_direction(2)!= nullptr){
+                std::cout<<"Conectada al este con: "<<current->get_direction(2)->get_ID()<<std::endl;
             }
-            if(current->get_west()!= nullptr){
-                std::cout<<"Conectada al oeste con: "<<current->get_west()->get_ID()<<std::endl;
+            if(current->get_direction(3)!= nullptr){
+                std::cout<<"Conectada al oeste con: "<<current->get_direction(3)->get_ID()<<std::endl;
             }
 
             if(current->get_tunnel()!=nullptr){
@@ -146,26 +164,26 @@ public:
         for (int i=1;i<=m_rooms.size();i++){
             Room*current = m_rooms[i];
             std::cout<<"#"<<current->get_ID();
-            if (current->get_north()!= nullptr){
-                std::cout<<" [N:"<<current->get_north()->get_ID();
+            if (current->get_direction(0)!= nullptr){
+                std::cout<<" [N:"<<current->get_direction(0)->get_ID();
             }
             else{
                 std::cout<<" [N:0";
             }
-            if (current->get_south()!= nullptr){
-                std::cout<<" ,S:"<<current->get_south()->get_ID();
+            if (current->get_direction(1)!= nullptr){
+                std::cout<<" ,S:"<<current->get_direction(1)->get_ID();
             }
             else{
                 std::cout<<" ,S:0";
             }
-            if (current->get_east()!= nullptr){
-                std::cout<<" ,E:"<<current->get_east()->get_ID();
+            if (current->get_direction(2)!= nullptr){
+                std::cout<<" ,E:"<<current->get_direction(2)->get_ID();
             }
             else{
                 std::cout<<" ,E:0";
             }
-            if (current->get_west()!= nullptr){
-                std::cout<<" ,W:"<<current->get_west()->get_ID();
+            if (current->get_direction(3)!= nullptr){
+                std::cout<<" ,W:"<<current->get_direction(3)->get_ID();
             }
             else{
                 std::cout<<" W:0";
