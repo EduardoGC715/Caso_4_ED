@@ -30,16 +30,12 @@ public:
                 return i;
             }
         }
+        return -1;
     }
 
     void generate_map(){
         int num_doors;
-        int id = 2;
-        int aux_itr = 1;
-
         int found;
-        bool gen_map = false;
-
         int rand_dir;
         int dir_room;
 
@@ -51,46 +47,39 @@ public:
 
         Room* current_room;
         Point* current_point;
-        auto* aux_point = new Point(0,0);
 
         m_rooms[1]=m_main_room;
 
-        while(!gen_map){
+        for(int num_rooms = 2, aux_iter = 1;num_rooms<=m_num_rooms;aux_iter++){
             num_doors = random(2,4);
             for(int doors=0;doors<num_doors;doors++){
 
-                current_room = m_rooms[aux_itr];
-                current_point= current_room->get_coords();
-                aux_point->set_point(current_point);
+                current_room = m_rooms[aux_iter];
+                current_point->set_point(current_room->get_coords());
 
                 rand_dir=random(0,3);
                 dir_room=directions[rand_dir];
 
                 if(rand_dir<2){
-                    aux_point->set_y(aux_point->get_y()+dir_room);
+                    current_point->set_y(current_point->get_y() + dir_room);
                 }
                 else {
-                    aux_point->set_x(current_point->get_x() + dir_room/2);
+                    current_point->set_x(current_point->get_x() + dir_room/2);
                 }
-                found=find_room_coords(aux_point);
-                if (found==-1){
-                    if(id>m_num_rooms){
-                        gen_map=true;
-                        break;
-                    }
-                    int a=find_key(dir_room*-1,directions);
-                    current_room->set_direction(rand_dir,new Room(id, new Point(aux_point->get_x(), aux_point->get_y())));
+
+                found=find_room_coords(current_point);
+                if (found==-1 && num_rooms<=m_num_rooms){
+                    current_room->set_direction(rand_dir,new Room(num_rooms, new Point(current_point->get_x(), current_point->get_y())));
                     current_room->get_direction(rand_dir)->set_direction(find_key(dir_room*-1,directions),current_room);
 
-                    m_rooms[id]=current_room->get_direction(rand_dir);
-                    id++;
+                    m_rooms[num_rooms]=current_room->get_direction(rand_dir);
+                    num_rooms++;
                 }
-                else{
+                else if(found!=-1){
                     current_room->set_direction(rand_dir,m_rooms[found]);
                     m_rooms[found]->set_direction(find_key(dir_room*-1,directions),current_room);
                 }
             }
-            aux_itr++;
         }
     }
 
