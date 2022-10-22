@@ -46,7 +46,7 @@ public:
         directions[3]=-2;
 
         Room* current_room;
-        Point* current_point;
+        Point* current_point=new Point(0,0);
 
         m_rooms[1]=m_main_room;
 
