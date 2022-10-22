@@ -1,5 +1,4 @@
-#include "../Map/Room.h"
-#include <unordered_map>
+#include "Room.h"
 
 #ifndef MAP
 #define MAP
@@ -13,7 +12,6 @@ private:
 public:
     Map(int t_rooms){
         m_num_rooms=t_rooms;
-        //...room constructor?
         m_main_room= new Room(1,new Point(0,0));
     }
 
@@ -32,10 +30,12 @@ public:
         int aux_itr = 1;
         int found;
         bool gen_map = false;
+        int rand_dir;
+        int directions[4]={1,-1,2,-2};
+        int dir_room;
 
         Room* current_room;
-        //...point constructor ?
-        auto* current_point = new Point(0,0);
+        Point* current_point;
         auto* aux_point = new Point(0,0);
 
         m_rooms[1]=m_main_room;
@@ -45,99 +45,31 @@ public:
             for(int gen_doors=0;gen_doors<doors;gen_doors++){
                 current_room = m_rooms[aux_itr];
                 current_point= current_room->get_coords();
-                aux_point->set_point(current_point);
-                switch (random(0,3)) {
-                    case 0://north
-                        aux_point->set_y(current_point->get_y() + 1);
-                        found=find_room_coords(aux_point);
-                        if (found==-1){
-                            if(id>m_num_rooms){
-                                //condicion de terminado, si la cantidad del id supera el numero de habitaciones no se pueden generar mas...
-                                gen_map=true;
-                                break;
-                            }
-                            //se asigna la habitacion
-                            current_room->set_north(new Room(id, new Point(aux_point->get_x(), aux_point->get_y())));
-                            current_room->get_north()->generate_tunnel();
-                            current_room->get_north()->set_south(current_room);
 
-                            //se agrega a los maps
-                            m_rooms[id]=current_room->get_north();
+                rand_dir=random(0,3);
+                dir_room=directions[rand_dir];
 
-                            // se genero con exito
-                            id++;
-                        }
-                        else{
-                            current_room->set_north(m_rooms[found]);
-                            m_rooms[found]->set_south(current_room);
-                        }
+                if(rand_dir<2){
+                    aux_point->set_y(aux_point->get_y()+dir_room);
+                }
+                else {
+                    aux_point->set_x(current_point->get_x() + dir_room/2);
+                }
+                found=find_room_coords(aux_point);
+                if (found==-1){
+                    if(id>m_num_rooms){
+                        gen_map=true;
                         break;
+                    }
+                    current_room->get_doors()[dir_room]=new Room(id, new Point(aux_point->get_x(), aux_point->get_y()));
+                    current_room->get_doors()[dir_room]->get_doors()[dir_room*-1]=current_room;
 
-                    case 1://south
-                        aux_point->set_y(current_point->get_y() - 1);
-                        found=find_room_coords(aux_point);
-                        if (found==-1){
-                            if(id>m_num_rooms){
-                                gen_map=true;
-                                break;
-                            }
-                            current_room->set_south(new Room(id, new Point(aux_point->get_x(), aux_point->get_y())));
-                            current_room->get_south()->generate_tunnel();
-                            current_room->get_south()->set_north(current_room);
-
-                            m_rooms[id]=current_room->get_south();
-
-                            id++;
-                        }
-                        else{
-                            current_room->set_south(m_rooms[found]);
-                            m_rooms[found]->set_north(current_room);
-                        }
-                        break;
-
-                    case 2://east
-                        aux_point->set_x(current_point->get_x() + 1);
-                        found=find_room_coords(aux_point);
-                        if (found==-1){
-                             if(id>m_num_rooms){
-                                 gen_map=true;
-                                    break;
-                             }
-                            current_room->set_east(new Room(id, new Point(aux_point->get_x(), aux_point->get_y())));
-                            current_room->get_east()->generate_tunnel();
-                            current_room->get_east()->set_west(current_room);
-
-                            m_rooms[id]=current_room->get_east();
-
-                            id++;
-                        }
-                        else{
-                            current_room->set_east(m_rooms[found]);
-                            m_rooms[found]->set_west(current_room);
-                        }
-                        break;
-
-                    case 3://west
-                        aux_point->set_x(current_point->get_x() - 1);
-                        found = find_room_coords(aux_point);
-                        if (found==-1){
-                            if(id>m_num_rooms){
-                                gen_map=true;
-                                break;
-                            }
-                            current_room->set_west(new Room(id, new Point(aux_point->get_x(), aux_point->get_y())));
-                            current_room->get_west()->generate_tunnel();
-                            current_room->get_west()->set_east(current_room);
-
-                            m_rooms[id]=current_room->get_west();
-
-                            id++;
-                        }
-                        else{
-                            current_room->set_west(m_rooms[found]);
-                            m_rooms[found]->set_east(current_room);
-                        }
-                        break;
+                    m_rooms[id]=current_room->get_doors()[dir_room];
+                    id++;
+                }
+                else{
+                    current_room->get_doors()[dir_room]=m_rooms[found];
+                    m_rooms[found]->get_doors()[dir_room*-1]=current_room;
                 }
             }
             aux_itr++;
