@@ -25,7 +25,7 @@ public:
     }
 
     int find_key(int t_value,std::unordered_map<int,int> t_map){
-        for(int i = 0; i <= m_rooms.size(); i++){
+        for(int i = 0; i <= t_map.size(); i++){
             if (t_map[i]==t_value){
                 return i;
             }
@@ -59,7 +59,7 @@ public:
 
                 rand_dir=random(0,3);
                 dir_room=directions[rand_dir];
-
+                int key=find_key(dir_room*-1,directions);
                 if(rand_dir<2){
                     current_point->set_y(current_point->get_y() + dir_room);
                 }
@@ -69,11 +69,12 @@ public:
 
                 found=find_room_coords(current_point);
                 if (found==-1 && num_rooms<=m_num_rooms){
+
                     auto new_room= new Room(num_rooms, new Point(current_point->get_x(), current_point->get_y()));
                     current_room->set_direction(rand_dir, new_room);
-                    current_room->get_direction(rand_dir)->set_direction(find_key(dir_room*-1,directions),current_room);
+                    new_room->set_direction(key,current_room);
                     //current_room->get_direction(rand_dir)->generate_tunnel();
-                    m_rooms[num_rooms]=current_room->get_direction(rand_dir);
+                    m_rooms[num_rooms]=new_room;
                     num_rooms++;
                 }
                 else if(found!=-1){

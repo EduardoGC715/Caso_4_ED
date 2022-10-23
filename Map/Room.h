@@ -12,11 +12,11 @@ private:
     Point* m_coords;
 public:
     Room(int t_room_ID,Point* t_coords){
-        m_tunnel = nullptr;
         m_doors[0]=nullptr;//North
         m_doors[1]=nullptr;//South
         m_doors[2]=nullptr;//East
         m_doors[3]=nullptr;//West
+        m_tunnel = nullptr;
         m_room_ID=t_room_ID;
         m_coords=t_coords;
     }
