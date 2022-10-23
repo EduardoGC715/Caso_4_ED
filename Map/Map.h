@@ -69,9 +69,10 @@ public:
 
                 found=find_room_coords(current_point);
                 if (found==-1 && num_rooms<=m_num_rooms){
-                    current_room->set_direction(rand_dir,new Room(num_rooms, new Point(current_point->get_x(), current_point->get_y())));
+                    auto new_room= new Room(num_rooms, new Point(current_point->get_x(), current_point->get_y()));
+                    current_room->set_direction(rand_dir, new_room);
                     current_room->get_direction(rand_dir)->set_direction(find_key(dir_room*-1,directions),current_room);
-
+                    //current_room->get_direction(rand_dir)->generate_tunnel();
                     m_rooms[num_rooms]=current_room->get_direction(rand_dir);
                     num_rooms++;
                 }
