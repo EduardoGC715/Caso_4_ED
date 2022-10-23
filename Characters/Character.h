@@ -9,7 +9,12 @@ struct Character {
         const int maxLoad;
         iStrategy* strategy;
 
+        void display_action() {
+            printf("#%d) %s: %s\n", ID, name.c_str(), strategy->message.c_str());
+        }
+
     public:
+        int ID;
         string name;
         int speed;
         int load;
@@ -22,7 +27,7 @@ struct Character {
 
         void setStrategy(iStrategy* pStrat, Map* pMap, PlayerScore* pScore) {
             strategy = pStrat;
-            strategy->init(&load, &maxLoad, pMap, pScore);
+            strategy->init(&speed, &load, &maxLoad, pMap, pScore);
         }
 
         virtual void executeStrategy() {
@@ -51,5 +56,6 @@ struct Character {
                 default:
                     break;
             }
+            display_action();
         }
 };
