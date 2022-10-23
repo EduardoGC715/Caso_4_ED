@@ -22,7 +22,7 @@ int main() {
     mapa->print_map_info();
     mapa->print_relations_map();
     mapa->print_graphic_map();
-/*
+
     minerHash* miners = new minerHash;
     miners->emplace(1, new Explorer);
     miners->emplace(2, new Freighter);
@@ -40,6 +40,6 @@ int main() {
     gameThread.join();
 
     delete miners;
-    delete strats;*/
+    delete strats;
     return 0;
 }
