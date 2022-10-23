@@ -4,11 +4,18 @@
 class iShallowStrategy : public iStrategy {
     protected:
         int getRoomQuota() {
-            return random(2, 4);
+            // return random(2, 4);
+            return 1; // TODO: Quitar tras finalizar debug
         }
 
-    public:
-        void searchChamber() {
-            printf("Explores tunnel slightly\n");
+        bool isDepthLimit() { // Nota: Diseño ideado a ser future-proof si aumenta tunel depth-limit
+            int tunnelHeight = tunnelEntrance->get_height();
+            if (tunnelHeight > 3) { // Medium to large tunnel
+                int currentHeight = currentChamber->get_height();
+                tunnelHeight /= 2; // Half height
+                return currentHeight <= (++tunnelHeight);
+            } else { // For small tunnels
+                return false;
+            }
         }
 };

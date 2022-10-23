@@ -2,6 +2,19 @@
 # include "../Interfaces/iDeepStrategy.h"
 
 class GreedyStrategy : public iDeepStrategy {
+    protected:
+        bool decide_mining() {
+        // Flat chance increase given by depth
+            int maxHeight = tunnelEntrance->get_height();
+            int currentHeight = currentChamber->get_height();
+            int threshold = 100*(maxHeight-currentHeight) / maxHeight;
+            int chance = random(1,100);
+
+            // Showcase print
+            // printf("\nChance %d | Threshold %d\n", chance, threshold);
+            return (chance <= threshold);
+        }
+
     public:
         GreedyStrategy(/* args */) {
             name = "Gold Digger: Full mining, Deep scouting, Early return";
@@ -13,9 +26,5 @@ class GreedyStrategy : public iDeepStrategy {
 
         void mineChamber() {
             printf("Gold digger mining placeholder\n");
-        }
-
-        void retrieveMineral() {
-            printf("Gold digger retrieval placeholder\n");
         }
 };

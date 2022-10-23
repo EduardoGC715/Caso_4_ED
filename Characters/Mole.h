@@ -27,6 +27,10 @@ struct Mole: public Character, public iSkill {
 
                 case RETRIEVE:
                     strategy->retrieveMineral(); break;
+                
+                case SCORE:
+                    strategy->score_minerals();
+                    break;
 
                 case UNAVAILABLE:
                 default:

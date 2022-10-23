@@ -4,11 +4,12 @@
 class iDeepStrategy : public iStrategy {
     protected:
         int getRoomQuota() {
-            return random(3, 5);
+            // return random(3, 5);
+            return 1; // TODO: Quitar tras finalizar debug
         }
 
-    public:
-        void searchChamber() {
-            printf("Explores tunnel deeply\n");
+        bool isDepthLimit() { // Establece cualquier nodo hoja como limite
+            int currentHeight = currentChamber->get_height();
+            return currentHeight == 1;
         }
 };

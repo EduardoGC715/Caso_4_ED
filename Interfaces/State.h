@@ -5,5 +5,6 @@ enum State {
     SEARCH      = 1,
     UNDERGROUND = 2,
     MINING      = 3,
-    RETRIEVE    = 4
+    RETRIEVE    = 4,
+    SCORE       = 5
 };
