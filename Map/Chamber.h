@@ -1,17 +1,19 @@
-#include <iostream>
+# include <iostream>
+# include <mutex>
 
 #ifndef CHAMBER
 #define CHAMBER
 
 class Chamber {
 private:
+    std::mutex mtx;
     int m_minerals;
     int m_distance;
     int m_potential;
     int m_chamber_ID;
     bool m_transitable;
 public:
-    Chamber(int t_minerals, int t_distance, int t_chamber_ID) {
+    Chamber(int t_minerals, int t_distance, int t_chamber_ID) : mtx() {
         m_minerals = t_minerals;
         m_distance = t_distance;
         m_potential=t_minerals*t_distance;
@@ -45,7 +47,10 @@ public:
     }
 
     void mine(){
-        m_minerals--;
+        mtx.lock();
+        --m_minerals;
+        update_transitable();
+        mtx.unlock();
     }
 
     bool is_transitable() {

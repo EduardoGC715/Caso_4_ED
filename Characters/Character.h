@@ -14,6 +14,7 @@ struct Character {
         }
 
     public:
+        bool* isDone;
         int ID;
         string name;
         int speed;
@@ -51,6 +52,10 @@ struct Character {
                 case SCORE:
                     strategy->score_minerals();
                     break;
+
+                case DONE:
+                    *isDone = true;
+                    return;
 
                 case UNAVAILABLE:
                 default:

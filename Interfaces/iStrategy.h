@@ -34,6 +34,10 @@ class iStrategy {
         virtual bool isDepthLimit() = 0; // Para regular profundidad explorada
         virtual bool decide_mining() = 0; // Para regular probabilidad de minado
 
+        bool explore_again() { // Para regular probabilidad de repetir tunel
+            return random(0,2); // Flat 66.67% chance of repeat
+        }
+
         void travel_delay() {
             double distance = currentChamber->get_data()->get_distance();
             double seconds = distance / double(*speed);
@@ -76,6 +80,7 @@ class iStrategy {
         void searchTunnel() { // Action for State = SEARCH
             if (currentRoom->isEmpty()) {
                 message = ("Has finished the maze");
+                state = DONE;
             } else if (! roomOptions->top()->isCleared()) {
                 proceed_room();
             } else {
@@ -110,9 +115,7 @@ class iStrategy {
                 int roomID = nextRoom->get_ID();
                 if (decide_tunnel(nextRoom)) {
                     message = ("Entered room #" + to_string(roomID) + " and found a tunnel");
-                    state = UNDERGROUND;
-                    currentChamber = tunnelEntrance;
-                    tunnelOptions->push(new RandOption(2));
+                    enter_tunnel();
                 } else {
                     message = ("Entered room #" + to_string(roomID));
                 }
@@ -132,6 +135,12 @@ class iStrategy {
             sleep(1);
         }
 
+        void enter_tunnel() {
+            state = UNDERGROUND;
+            currentChamber = tunnelEntrance;
+            tunnelOptions->push(new RandOption(2));
+        }
+
         bool decide_tunnel(Room* pRoom) {
             if (currentRoom->getSize() >= getRoomQuota())
             {// Si cumple cuota de profundidad explorada
@@ -145,12 +154,22 @@ class iStrategy {
             return false;
         }
 
+        void discard_tunnel() {
+            add_to_score();
+            int tunnelID = tunnelEntrance->get_data()->get_ID();
+            clearedChambers->emplace(tunnelID, tunnelEntrance);
+            message += ("Cleared tunel #" + to_string(tunnelID/100));
+            state = SEARCH;
+        }
+
+        void discard_chamber() {
+            int tunnelID = currentChamber->get_data()->get_ID();
+            clearedChambers->emplace(tunnelID, currentChamber);
+        }
+
         void searchChamber() { // Action for State = UNDERGROUND
             if (currentChamber == nullptr) {
-                int tunnelID = tunnelEntrance->get_data()->get_ID();
-                clearedChambers->emplace(tunnelID, tunnelEntrance);
-                message = ("Cleared tunel #" + to_string(tunnelID/100));
-                state = SEARCH;
+                discard_tunnel();
             } else if (! tunnelOptions->top()->isCleared() && !isDepthLimit()) {
                 proceed_chamber();
             } else {
@@ -180,8 +199,7 @@ class iStrategy {
                     tunnelOptions->push(new RandOption(2));
                     travel_delay(); // TODO: Activar delay
                     if (decide_mining()) {
-                        // state = MINING;
-                        // state = RETRIEVE; ++(*load);
+                        state = MINING;
                         message = ("Entered chamber #" + to_string(chamberID) + " and started mining");
                     } else {
                         message = ("Entered chamber #" + to_string(chamberID));
@@ -208,10 +226,9 @@ class iStrategy {
                 }
             } else {
                 message = ("Returned to tunnel entrance");
+                sleep(1);
             }
         }
-
-        
 
         void retrieveMineral() { // Action for State = RETRIEVE
             if (currentChamber != nullptr) {
@@ -220,23 +237,28 @@ class iStrategy {
                 int chamberID = tunnelEntrance->get_data()->get_ID();
                 message = ("Retrieved minerals from tunnel #" + to_string(chamberID));
                 state = SCORE;
+                sleep(1);
             }
         }
 
+        void add_to_score() {
+            message = ""; // Clear buffer
+            if (*load > 0) { // Add score message if possible
+                message += ("Scored " + to_string(*load) + " points! - ");
+                score->add(*load);
+                *load = 0;
+            }
+        }
         
         void score_minerals() {
-            score->add(*load);
-            message = ("Scored " + to_string(*load) + " points");
-            /* if (explore_again()) {
-                strategy->enter_tunnel();
-                strategy->state = UNDERGROUND;
-                // printf("Enters again to mine more minerals")
+            if (explore_again()) {
+                enter_tunnel();
+                add_to_score();
+                message += ("Explores tunnel again");
             } else {
-                strategy->discard_tunnel();
-                strategy->state = SEARCH;
-                // printf("Moves on to search other tunnels")
-            } */
-            *load = 0;
+                discard_tunnel(); // add_to_score call inside
+            }
+            sleep(1);
         }
        
 };

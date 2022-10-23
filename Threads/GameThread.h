@@ -32,6 +32,8 @@ class GameThread {
         CharacterThread* thread_objs;
 
         // Turn Data
+        bool finishEarly;
+        bool* isCharacterDone;
         int currentTurn;
         int timeLeft;
 
@@ -42,6 +44,7 @@ class GameThread {
             score_board = new PlayerScore[MAX_PLAYERS];
             sub_threads = new thread[CREW_SIZE];
             thread_objs = new CharacterThread[CREW_SIZE];
+            isCharacterDone = new bool[CREW_SIZE];
             
             miners = pMiners;
             strategies = pStrats;
@@ -51,9 +54,10 @@ class GameThread {
             delete[] thread_objs;
             delete[] sub_threads;
             delete[] score_board;
-            delete[] gameMap;
-            delete[] miners;
-            delete[] strategies;
+            delete[] isCharacterDone;
+            // delete gameMap;
+            // delete miners;
+            // delete strategies;
         }
 
         void setMap(Map* pMap) {
@@ -138,12 +142,29 @@ class GameThread {
                 selectedStrat = strategies->at(choice.get())->clone();
 
                 // Finish setup #index
+                selectedChar->isDone = isCharacterDone+index;
                 selectedChar->ID = (index+1);
                 selectedChar->setStrategy(selectedStrat, gameMap, score_board+currentTurn);
                 thread_objs[index].setPlayerID(currentTurn+1);
                 thread_objs[index].setCharacter(selectedChar);
             }
             resumeAll();
+        }
+
+        bool resetEarlyFlag() {
+            for (int index = 0; index < CREW_SIZE; ++index) {
+                isCharacterDone[index] = false;
+            }
+            return false;
+        }
+
+        bool areCharactersDone() {
+            for (int index = 0; index < CREW_SIZE; ++index) {
+                if (! isCharacterDone[index]) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         void operator() () {
@@ -159,7 +180,9 @@ class GameThread {
                 setupThread = new thread(&GameThread::setup, this);
                 setupThread->detach();
 
-                while (timeLeft >= 0) {
+                finishEarly = resetEarlyFlag();
+                while (timeLeft >= 0 && ! finishEarly) {
+                    finishEarly = areCharactersDone();
                     sleep(1);
                     --timeLeft;
                 }
