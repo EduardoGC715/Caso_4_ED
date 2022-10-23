@@ -1,5 +1,4 @@
 # pragma once
-# include <chrono>
 # include "../utils/ioUtils.h"
 # include "../Characters/Character.h"
 
@@ -48,11 +47,7 @@ class CharacterThread {
                 while (! isReady) {
                     std::this_thread::yield();
                 }
-                
-                printf("#%d) %s: ", ID, miner->name.c_str());
                 miner->executeStrategy();
-                // printf("(%d) CharThread #%d: %s\n", playerID,ID, miner->name.c_str());
-                std::this_thread::sleep_for(chrono::seconds(1)); // Comentar para turbo debug B)
             }
         }
 };

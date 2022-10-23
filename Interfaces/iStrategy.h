@@ -5,6 +5,7 @@
 # include "State.h"
 # include "PlayerScore.h"
 # include "RandOption.h"
+# include "../utils/ThreadUtils.h"
 # include "../ADT/List.h"
 # include "../Map/Map.h"
 
@@ -33,18 +34,28 @@ class iStrategy {
         virtual bool isDepthLimit() = 0; // Para regular profundidad explorada
         virtual bool decide_mining() = 0; // Para regular probabilidad de minado
 
+        void travel_delay() {
+            double distance = currentChamber->get_data()->get_distance();
+            double seconds = distance / double(*speed);
+            // printf("\nSpan %f\n", seconds); // Showcase print
+            sleep(seconds);
+        }
+
     public:
         string name;
+        string message;
         const int* maxLoad;
         int* load;
+        int* speed;
 
         virtual iStrategy* clone() = 0;
         virtual void mineChamber() = 0;
         
 
-        void init(int* pLoad, const int* pMaxLoad, Map* pMap, PlayerScore* pScore) {
+        void init(int* pSpeed, int* pLoad, const int* pMaxLoad, Map* pMap, PlayerScore* pScore) {
             state = SEARCH;
             score = pScore;
+            speed = pSpeed;
             load = pLoad;
             maxLoad = pMaxLoad;
 
@@ -64,7 +75,7 @@ class iStrategy {
 
         void searchTunnel() { // Action for State = SEARCH
             if (currentRoom->isEmpty()) {
-                printf("Has finished the maze\n");
+                message = ("Has finished the maze");
             } else if (! roomOptions->top()->isCleared()) {
                 proceed_room();
             } else {
@@ -76,22 +87,23 @@ class iStrategy {
             int option = roomOptions->top()->getOption();
             Room* nextRoom = currentRoom->top()->get_direction(option);
             if (nextRoom == nullptr) {
-                printf("Took a break\n");
+                message = ("Took a break");
             } else if (currentRoom->find(nextRoom) != NOT_FOUND) {
-                printf("Considers returning\n");
+                message = ("Considers returning");
             } else {
                 currentRoom->push(nextRoom);
                 roomOptions->push(new RandOption(4));
                 int roomID = nextRoom->get_ID();
                 if (decide_tunnel(nextRoom)) {
-                    printf("Entered room #%d and found a tunnel\n", roomID);
+                    message = ("Entered room #" + to_string(roomID) + " and found a tunnel");
                     state = UNDERGROUND;
                     currentChamber = tunnelEntrance;
                     tunnelOptions->push(new RandOption(2));
                 } else {
-                    printf("Entered room #%d\n", roomID);
+                    message = ("Entered room #" + to_string(roomID));
                 }
             }
+            sleep(1);
         }
 
         void retreat_door() {
@@ -99,10 +111,11 @@ class iStrategy {
             currentRoom->pop();
             Room* nextRoom = currentRoom->top();
             if (nextRoom != nullptr) {
-                printf("Returned to room #%d\n", nextRoom->get_ID());
+                message = ("Returned to room #" + to_string(nextRoom->get_ID()));
             } else {
-                printf("Cleared maze\n");
+                message = ("Cleared maze");
             }
+            sleep(1);
         }
 
         bool decide_tunnel(Room* pRoom) {
@@ -122,7 +135,7 @@ class iStrategy {
             if (currentChamber == nullptr) {
                 int tunnelID = tunnelEntrance->get_data()->get_ID();
                 clearedChambers->emplace(tunnelID, tunnelEntrance);
-                printf("Cleared tunel #%d\n", (tunnelID/100));
+                message = ("Cleared tunel #" + to_string(tunnelID/100));
                 state = SEARCH;
             } else if (! tunnelOptions->top()->isCleared() && !isDepthLimit()) {
                 proceed_chamber();
@@ -142,7 +155,7 @@ class iStrategy {
                 case 1:
                     nextChamber = currentChamber->get_right();
                     break;
-            }
+            }// Nota: Posible mejor a TreeNode -> getChild(Direction);
 
             if (nextChamber != nullptr) {
                 chamberID = nextChamber->get_data()->get_ID();
@@ -151,36 +164,36 @@ class iStrategy {
                 if (! isCleared && isTransitable) {
                     currentChamber = nextChamber;
                     tunnelOptions->push(new RandOption(2));
-                    // sleep(distance/speed)
+                    travel_delay(); // TODO: Activar delay
                     if (decide_mining()) {
                         // state = MINING;
                         // state = RETRIEVE; ++(*load);
-                        printf("Entered chamber #%d and started mining\n", chamberID);
+                        message = ("Entered chamber #" + to_string(chamberID) + " and started mining");
                     } else {
-                        printf("Entered chamber #%d\n", chamberID);
+                        message = ("Entered chamber #" + to_string(chamberID));
                     }
                 } else { // Ignora camaras colapsadas o completadas
-                    printf("Ignored chamber #%d\n", chamberID);
+                    message = ("Ignored chamber #" + to_string(chamberID));
                 }
             } else { // Descarta opcion nula
-                printf("Took a break underground\n");
+                message = ("Took a break underground");
             }
         }
 
         void retreat_chamber() {
             delete tunnelOptions->pop();
+            travel_delay(); // TODO: Activar delay
             currentChamber = currentChamber->get_parent();
             if (currentChamber != nullptr) {
-                // sleep(distance/speed)
                 if (currentChamber->get_data()->is_transitable()) {
                     int chamberID = currentChamber->get_data()->get_ID();
-                    printf("Returned to chamber #%d\n", chamberID);
+                    message = ("Returned to chamber #" + to_string(chamberID));
                 } else {
-                    printf("Got trapped behind a collapsed chamber");
+                    message = ("Got trapped behind a collapsed chamber");
                     state = UNAVAILABLE;
                 }
             } else {
-                printf("Returned to tunnel entrance\n");
+                message = ("Returned to tunnel entrance");
             }
         }
 
@@ -190,7 +203,8 @@ class iStrategy {
             if (currentChamber != nullptr) {
                 retreat_chamber();
             } else {
-                printf("Retrieved minerals from tunnel #%d\n", tunnelEntrance->get_data()->get_ID());
+                int chamberID = tunnelEntrance->get_data()->get_ID();
+                message = ("Retrieved minerals from tunnel #" + to_string(chamberID));
                 state = SCORE;
             }
         }
@@ -198,7 +212,7 @@ class iStrategy {
         
         void score_minerals() {
             score->add(*load);
-            printf("Scored %d points\n", *load);
+            message = ("Scored " + to_string(*load) + " points");
             /* if (explore_again()) {
                 strategy->enter_tunnel();
                 strategy->state = UNDERGROUND;

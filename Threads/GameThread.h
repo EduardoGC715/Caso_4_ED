@@ -1,8 +1,8 @@
 # pragma once
 # include <thread>
-# include <chrono>
 # include <future>
 # include <unordered_map>
+# include "../utils/ThreadUtils.h"
 # include "CharacterThread.h"
 # include "../ADT/List.h"
 # include "../ADT/Queue.h"
@@ -79,7 +79,7 @@ class GameThread {
         void resumeAll() {
             for (int index = 0; index < CREW_SIZE;) {
                 thread_objs[index++].resume();
-                this_thread::sleep_for(chrono::seconds(1));
+                sleep(1);
             }
         }
 
@@ -138,6 +138,7 @@ class GameThread {
                 selectedStrat = strategies->at(choice.get())->clone();
 
                 // Finish setup #index
+                selectedChar->ID = (index+1);
                 selectedChar->setStrategy(selectedStrat, gameMap, score_board+currentTurn);
                 thread_objs[index].setPlayerID(currentTurn+1);
                 thread_objs[index].setCharacter(selectedChar);
@@ -157,17 +158,16 @@ class GameThread {
 
                 setupThread = new thread(&GameThread::setup, this);
                 setupThread->detach();
-                
-                chrono::seconds delay(1);
+
                 while (timeLeft >= 0) {
-                    this_thread::sleep_for(delay);
+                    sleep(1);
                     --timeLeft;
                 }
 
                 pauseAll();
                 printf("\n");
                 delete setupThread;
-                this_thread::sleep_for(chrono::seconds(1));
+                sleep(1);
             }
             stopAll();
             // showResults();

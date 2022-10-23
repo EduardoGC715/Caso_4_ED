@@ -37,6 +37,7 @@ struct Mole: public Character, public iSkill {
                     //executeSkill()
                     break;
             }
+            display_action();
         }
 
         void executeSkill() {
