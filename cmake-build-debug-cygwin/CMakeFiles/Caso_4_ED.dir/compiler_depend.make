@@ -168,7 +168,18 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/ostream.tcc \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/istream \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/istream.tcc \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/unordered_map \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/ext/aligned_buffer.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable_policy.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/enable_special_members.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_map.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/erase_if.h \
   ../Interfaces/State.h \
+  ../Interfaces/PlayerScore.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/mutex \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/std_mutex.h \
+  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unique_lock.h \
   ../Interfaces/RandOption.h \
   ../utils/Random.h \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/random \
@@ -186,10 +197,8 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/numeric \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/stl_numeric.h \
   /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bit \
+  ../utils/ThreadUtils.h \
   ../ADT/List.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/mutex \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/std_mutex.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unique_lock.h \
   ../ADT/Node.h \
   ../ADT/Stack.h \
   ../ADT/Queue.h \
@@ -202,13 +211,6 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
   ../utils/Max.h \
   ../utils/Random.h \
   ../ADT/Point.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/unordered_map \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/ext/aligned_buffer.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable_policy.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/enable_special_members.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_map.h \
-  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/erase_if.h \
   ../Characters/Freighter.h \
   ../Characters/Mole.h \
   ../Interfaces/iSkill.h \
@@ -264,12 +266,6 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
 
 ../Characters/Freighter.h:
 
-../Interfaces/iShallowStrategy.h:
-
-/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_map.h:
-
-/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/enable_special_members.h:
-
 ../Strategy/SpitefulStrategy.h:
 
 ../utils/Max.h:
@@ -308,6 +304,12 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
 
 ../Interfaces/State.h:
 
+../Interfaces/iShallowStrategy.h:
+
+/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_map.h:
+
+/usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/enable_special_members.h:
+
 /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/atomic_base.h:
 
 ../Strategy/GreedyStrategy.h:
@@ -329,6 +331,8 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
 /usr/include/wctype.h:
 
 /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/locale_facets.h:
+
+../utils/ThreadUtils.h:
 
 /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/streambuf:
 
@@ -543,6 +547,8 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: ../main.cpp \
 /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/stl_relops.h:
 
 /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/type_traits:
+
+../Interfaces/PlayerScore.h:
 
 /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/ios_base.h:
 

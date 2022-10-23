@@ -146,6 +146,24 @@ class GameThread {
             resumeAll();
         }
 
+        void showResults(){
+            int winner=0;
+            int max_score=0;
+            int compare=0;
+            for (int index = 0; index < MAX_PLAYERS;) {
+                compare=score_board[index].get();
+                if (compare>max_score){
+                    max_score=compare;
+                    winner=index;
+                }
+                else{
+                    printf("It´s a tie!");
+                    return;
+                }
+            }
+            printf("Winner!\nPlayer: %d",winner+1);
+        }
+
         void operator() () {
             // initMap();
             printf("Game Start!\n");
@@ -169,7 +187,7 @@ class GameThread {
                 delete setupThread;
                 sleep(1);
             }
+            showResults();
             stopAll();
-            // showResults();
         }
 };
