@@ -20,6 +20,14 @@ public:
         m_room_ID=t_room_ID;
         m_coords=t_coords;
     }
+
+    ~Room() {
+        if (m_tunnel != nullptr) {
+            delete m_tunnel;
+        }
+        delete m_coords;
+    }
+
     void generate_tunnel(){
         int tunnel_prob = random(0,99);
         if (tunnel_prob<66){

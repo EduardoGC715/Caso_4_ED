@@ -13,6 +13,10 @@ public:
         m_root = nullptr;
     }
 
+    ~AVL_Tree () {
+        delete m_root;
+    }
+
     int height(Tree_Node<T>* t_node) {
         if (t_node == nullptr)
             return 0;

@@ -24,6 +24,12 @@ public:
         m_height = 1;
     }
 
+    ~Tree_Node() {
+        delete m_data;
+        delete m_left;
+        delete m_right;
+    }
+
     T* get_data(){
         return m_data;
     }

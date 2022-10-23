@@ -50,7 +50,6 @@ class iStrategy {
 
         virtual iStrategy* clone() = 0;
         virtual void mineChamber() = 0;
-        
 
         void init(int* pSpeed, int* pLoad, const int* pMaxLoad, Map* pMap, PlayerScore* pScore) {
             state = SEARCH;

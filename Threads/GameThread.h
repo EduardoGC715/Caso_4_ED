@@ -51,9 +51,9 @@ class GameThread {
             delete[] thread_objs;
             delete[] sub_threads;
             delete[] score_board;
-            delete[] gameMap;
-            delete[] miners;
-            delete[] strategies;
+            delete gameMap;
+            delete miners;
+            delete strategies;
         }
 
         void setMap(Map* pMap) {

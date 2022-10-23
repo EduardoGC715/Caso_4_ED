@@ -23,6 +23,10 @@ struct Character {
         : maxLoad(pMaxLoad), speed(pSpeed), load(0)
         {}
 
+        ~Character() {
+            delete strategy;
+        }
+
         virtual Character* clone() = 0;
 
         void setStrategy(iStrategy* pStrat, Map* pMap, PlayerScore* pScore) {

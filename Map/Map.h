@@ -15,6 +15,12 @@ public:
         m_main_room= new Room(1,new Point(0,0));
     }
 
+    ~Map() {
+        for (auto pair : m_rooms) {
+            delete pair.second;
+        }
+    }
+
     int find_room_coords(Point* t_point){
         for(int i = 1; i <= m_rooms.size(); i++){
             if (m_rooms[i]->get_coords()->compare_point(t_point)){

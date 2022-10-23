@@ -38,8 +38,5 @@ int main() {
     game.setMap(mapa);
     thread gameThread(ref(game));
     gameThread.join();
-
-    delete miners;
-    delete strats;
     return 0;
 }
