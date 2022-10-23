@@ -104,7 +104,8 @@
 				7,
 				8,
 				9,
-				10
+				10,
+				11
 			]
 		}
 	],
@@ -164,6 +165,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "ADT/Priority_Queue.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ADT/Prio_Q_Node.h",
 			"sourceGroupIndex" : 1
 		}
 	],

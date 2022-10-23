@@ -1,16 +1,16 @@
-#include "Node.h"
+#include "Prio_Q_Node.h"
 #ifndef PRIORITY_QUEUE
 #define PRIORITY_QUEUE 1
 
 template <class T>
-class Queue {
+class Priority_Queue {
 private:
-    Node<T> *first;
-    Node<T> *last;
+    Prio_Q_Node<T> *first;
+    Prio_Q_Node<T> *last;
     int quantity;
-    Node<T> *searchPosition = nullptr;
+    Prio_Q_Node<T> *searchPosition = nullptr;
 public:
-    Queue() {
+    Priority_Queue() {
         first = nullptr;
         last = nullptr;
         quantity = 0;
@@ -18,28 +18,23 @@ public:
 
     void enqueue(T pData, int pPriority=0) {
         //Prioridad: El numero mÃ¡s pequeÃ±o va primero
-        Node<T> *newNode = new Node<T>(pData, pPriority);
+        auto *newNode = new Prio_Q_Node<T>(pData, pPriority);
         if (this->quantity>0) {
             if(pPriority<this->first->getPriority()) {
-                cout<<"agrego "<<newNode->getData()<<" al principio"<<endl;
                 this->first->setNext(newNode);
                 newNode->setPrevious(this->first);
                 this->first=newNode;
             }
             else if(pPriority>=this->last->getPriority()){
-                cout<<"agrego "<<newNode->getData()<<" al final"<<endl;
                 newNode->setNext(last);
                 this->last->setPrevious(newNode);
                 this->last = newNode;
             }
             else{
-                cout<<"busco el lugar del "<<newNode->getData()<<endl;
                 searchPosition=this->first->getPrevious();
 
                 while (searchPosition != NULL){
-                    cout<<"comparo "<<searchPosition->getPriority()<<" "<<newNode->getPriority()<<endl;
                     if (searchPosition->getPriority()>pPriority) {
-                        cout<<"agrego "<<newNode->getData()<<" antes del "<<searchPosition->getData()<<endl;
                         newNode->setNext(searchPosition->getNext());
                         newNode->setPrevious(searchPosition);
                         searchPosition->getNext()->setPrevious(newNode);
@@ -53,7 +48,6 @@ public:
             }
         }
         else {
-            cout<<"agrego "<<newNode->getData()<<" al principio ya que esta vacia"<<endl;
             this->first = newNode;
             this->last = newNode;
         }
@@ -77,6 +71,9 @@ public:
 
     bool isEmpty() {
         return !quantity;
+    }
+    int get_first_priority(){
+        return first->getPriority();
     }
 };
 #endif

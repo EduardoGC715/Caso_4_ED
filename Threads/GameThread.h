@@ -8,6 +8,7 @@
 # include "../ADT/Queue.h"
 # include "../utils/ioUtils.h"
 # include "../Map/Map.h"
+#include "../ADT/Priority_Queue.h"
 
 using namespace std;
 
@@ -146,22 +147,26 @@ class GameThread {
             resumeAll();
         }
 
-        void showResults(){
-            int winner=0;
-            int max_score=0;
-            int compare=0;
-            for (int index = 0; index < MAX_PLAYERS;) {
-                compare=score_board[index].get();
-                if (compare>max_score){
-                    max_score=compare;
-                    winner=index;
+        void showResults() {
+            auto scores = new Priority_Queue<int>();
+            bool done = false;
+            int index=0;
+            while (index<MAX_PLAYERS) {
+                if(!done){
+                    int score = score_board[index].get();
+                    scores->enqueue(score + index + 1, score);
                 }
                 else{
-                    printf("It´s a tie!");
-                    return;
+                    int curr_score = scores->get_first_priority();
+                    int player = scores->dequeue() - curr_score;
+                    printf("#%d: Player %d Score:%d\n", index, player, curr_score);
+                }
+                index++;
+                if(!done && index==MAX_PLAYERS){
+                    done=true;
+                    index=0;
                 }
             }
-            printf("Winner!\nPlayer: %d",winner+1);
         }
 
         void operator() () {
