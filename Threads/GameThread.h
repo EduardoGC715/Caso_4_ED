@@ -15,36 +15,45 @@ typedef unordered_map<int, class Character*> minerHash;
 typedef unordered_map<int, iStrategy*> stratHash;
 
 class GameThread {
-    public:
+    private:
+        // Game Parameters
         const int MAX_PLAYERS;
         const int TURN_DURATION;    // In seconds
         const int CREW_SIZE;
 
-        bool isWaiting;
-        bool isRunning;
-        int currentTurn;
-        int timeLeft;
-
+        // Game Data
         Map* gameMap;
-        CharacterThread* thread_objs;
-        thread* sub_threads;
-
         minerHash* miners;
         stratHash* strategies;
 
+        // Player Data
+        PlayerScore* score_board;
+        thread* sub_threads;
+        CharacterThread* thread_objs;
+
+        // Turn Data
+        int currentTurn;
+        int timeLeft;
+
+    public:
         GameThread(int pPlayers, int pDuration, int pCrewSize, minerHash* pMiners, stratHash* pStrats)
         : MAX_PLAYERS(pPlayers), TURN_DURATION(pDuration), CREW_SIZE(pCrewSize) {
             // gameMap = nullptr;
-            thread_objs = new CharacterThread[CREW_SIZE];
+            score_board = new PlayerScore[MAX_PLAYERS];
             sub_threads = new thread[CREW_SIZE];
+            thread_objs = new CharacterThread[CREW_SIZE];
+            
             miners = pMiners;
             strategies = pStrats;
         }
 
         ~GameThread() {
-            // delete gameMap;
             delete[] thread_objs;
             delete[] sub_threads;
+            delete[] score_board;
+            delete[] gameMap;
+            delete[] miners;
+            delete[] strategies;
         }
 
         void setMap(Map* pMap) {
@@ -86,6 +95,12 @@ class GameThread {
             }
         }
 
+        void initScoreboard() {
+            for (int index = 0; index < MAX_PLAYERS;) {
+                score_board[index].setID(index++);
+            }
+        }
+
         void initSubthreads() {
             for (int index = 0; index < CREW_SIZE; ++index) {
                 thread_objs[index] = CharacterThread(index+1);
@@ -123,7 +138,7 @@ class GameThread {
                 selectedStrat = strategies->at(choice.get())->clone();
 
                 // Finish setup #index
-                selectedChar->setStrategy(selectedStrat, gameMap);
+                selectedChar->setStrategy(selectedStrat, gameMap, score_board+currentTurn);
                 thread_objs[index].setPlayerID(currentTurn+1);
                 thread_objs[index].setCharacter(selectedChar);
             }
@@ -131,7 +146,9 @@ class GameThread {
         }
 
         void operator() () {
+            // initMap();
             printf("Game Start!\n");
+            initScoreboard();
             initSubthreads();
             thread* setupThread = nullptr;
             for (currentTurn = 0; currentTurn < MAX_PLAYERS; ++currentTurn) {
@@ -153,6 +170,6 @@ class GameThread {
                 this_thread::sleep_for(chrono::seconds(1));
             }
             stopAll();
-            
+            // showResults();
         }
 };

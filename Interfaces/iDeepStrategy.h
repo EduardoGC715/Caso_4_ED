@@ -12,9 +12,4 @@ class iDeepStrategy : public iStrategy {
             int currentHeight = currentChamber->get_height();
             return currentHeight == 1;
         }
-
-    public:
-        void searchChamber() {
-            printf("Explores tunnel deeply\n");
-        }
 };

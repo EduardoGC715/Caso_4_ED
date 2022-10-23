@@ -2,6 +2,20 @@
 # include "../Interfaces/iDeepStrategy.h"
 
 class BoldStrategy : public iDeepStrategy {
+    protected:
+        bool decide_mining() {
+        // Very low probability at low depth, high at max depth
+            int maxHeight = tunnelEntrance->get_height();
+            int currentHeight = currentChamber->get_height();
+            int threshold = 100*(maxHeight-currentHeight) / (maxHeight*currentHeight);
+            int chance = random(1,100);
+
+            // Showcase print
+            // printf("\nChance %d | Threshold %d\n", chance, threshold);
+            return (chance <= threshold);
+            
+        }
+
     public:
         BoldStrategy() {
             name = "Spelunker: Chunk mining, Deep scouting, Early return";
@@ -13,9 +27,5 @@ class BoldStrategy : public iDeepStrategy {
 
         void mineChamber() {
             printf("Spelunker mining placeholder\n");
-        }
-
-        void retrieveMineral() {
-            printf("Spelunker retrieval placeholder\n");
         }
 };

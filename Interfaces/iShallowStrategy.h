@@ -18,9 +18,4 @@ class iShallowStrategy : public iStrategy {
                 return false;
             }
         }
-
-    public:
-        void searchChamber() {
-            printf("Explores tunnel slightly\n");
-        }
 };

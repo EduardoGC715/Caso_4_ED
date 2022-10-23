@@ -3,6 +3,7 @@
 # include <iostream>
 # include <unordered_map>
 # include "State.h"
+# include "PlayerScore.h"
 # include "RandOption.h"
 # include "../ADT/List.h"
 # include "../Map/Map.h"
@@ -15,7 +16,9 @@ typedef unordered_map<int, ChamberNode*> ChamberHash;
 
 class iStrategy {
     protected:
+        PlayerScore* score;
         State state;
+        bool isStocked;
 
         List<Room>* currentRoom;
         List<RandOption>* roomOptions;
@@ -26,25 +29,25 @@ class iStrategy {
 
         ChamberHash* clearedChambers;
 
-        virtual int getRoomQuota() = 0;
+        virtual int getRoomQuota() = 0; // Para regular puertas exploradas
         virtual bool isDepthLimit() = 0; // Para regular profundidad explorada
-
-        int getDepthQuota() {
-            ChamberNode* tunnel = currentRoom->top()->get_tunnel()->get_entrance();
-            int tunnelHeight = tunnel->get_height();
-            int halfHeight = (tunnelHeight/2);
-            return random(0,1);
-        }
+        virtual bool decide_mining() = 0; // Para regular probabilidad de minado
 
     public:
         string name;
+        const int* maxLoad;
+        int* load;
 
         virtual iStrategy* clone() = 0;
         virtual void mineChamber() = 0;
         
 
-        void init(Map* pMap) {
+        void init(int* pLoad, const int* pMaxLoad, Map* pMap, PlayerScore* pScore) {
             state = SEARCH;
+            score = pScore;
+            load = pLoad;
+            maxLoad = pMaxLoad;
+
             currentRoom = new List<Room>;
             roomOptions = new List<RandOption>;
             currentChamber = nullptr;
@@ -165,6 +168,7 @@ class iStrategy {
                     // sleep(distance/speed)
                     if (decide_mining()) {
                         // state = MINING;
+                        // state = RETRIEVE; ++(*load);
                         printf("Entered chamber #%d and started mining\n", chamberID);
                     } else {
                         printf("Entered chamber #%d\n", chamberID);
@@ -194,22 +198,31 @@ class iStrategy {
             }
         }
 
-        bool decide_mining() {
-            // TODO: Desarrollar polimorfismo segun estrategias concretas
-            // Ej. Greedy aumenta frecuencia de minado segun profundidad (i.e node.height closer to 1)
-            // Ej. Spiteful aumenta frecuencia segun profundidad baja (node height closer to entrance.height)
-            // Ej. Cautious tiene una frecuencia consistente (i.e probabilidad con random(a,b))
-            // Ej. Bold/Spelunker similar a greedy para enfatizar "mayor interes por exploracion que minar"
-            return getDepthQuota();
-        }
+        
 
         void retrieveMineral() { // Action for State = RETRIEVE
             if (currentChamber != nullptr) {
                 retreat_chamber();
             } else {
-                printf("Exited tunnel #%d\n", tunnelEntrance->get_data()->get_ID());
+                printf("Retrieved minerals from tunnel #%d\n", tunnelEntrance->get_data()->get_ID());
+                state = SCORE;
             }
-            // Random: 
-            // Minero se cansa, descarta tunel y busca otro, de lo contrario continua a UNDERGROUND
         }
+
+        
+        void score_minerals() {
+            score->add(*load);
+            printf("Scored %d points\n", *load);
+            /* if (explore_again()) {
+                strategy->enter_tunnel();
+                strategy->state = UNDERGROUND;
+                // printf("Enters again to mine more minerals")
+            } else {
+                strategy->discard_tunnel();
+                strategy->state = SEARCH;
+                // printf("Moves on to search other tunnels")
+            } */
+            *load = 0;
+        }
+       
 };

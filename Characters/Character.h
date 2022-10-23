@@ -18,16 +18,11 @@ struct Character {
         : maxLoad(pMaxLoad), speed(pSpeed), load(0)
         {}
 
-        void setStrategy(iStrategy* pStrat, Map* pMap) {
-            strategy = pStrat;
-            strategy->init(pMap);
-        }
-
         virtual Character* clone() = 0;
 
-        void setMap(Map* pMap) {
-            strategy->init(pMap);
-            
+        void setStrategy(iStrategy* pStrat, Map* pMap, PlayerScore* pScore) {
+            strategy = pStrat;
+            strategy->init(&load, &maxLoad, pMap, pScore);
         }
 
         virtual void executeStrategy() {
@@ -41,10 +36,16 @@ struct Character {
                     break;
 
                 case MINING:
-                    strategy->mineChamber(); break;
+                    strategy->mineChamber();
+                    break;
 
                 case RETRIEVE:
-                    strategy->retrieveMineral(); break;
+                    strategy->retrieveMineral();
+                    break;
+                
+                case SCORE:
+                    strategy->score_minerals();
+                    break;
 
                 case UNAVAILABLE:
                 default:
