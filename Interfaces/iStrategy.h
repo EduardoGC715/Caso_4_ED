@@ -58,7 +58,7 @@ class iStrategy {
         void proceed_room() {
             Room* nextRoom = nullptr;
             RandOption* currentOptions = roomOptions->top();
-            switch (currentOptions->getOption()) {
+            /*switch (currentOptions->getOption()) {
                 case 0:
                     nextRoom = currentRoom->top()->get_north();
                     break;
@@ -71,7 +71,7 @@ class iStrategy {
                 case 3:
                     nextRoom = currentRoom->top()->get_west();
                     break;
-            }
+            }*/
             if (nextRoom == nullptr) {
                 printf("Took a break\n");
             } else if (currentRoom->find(nextRoom) != NOT_FOUND) {
