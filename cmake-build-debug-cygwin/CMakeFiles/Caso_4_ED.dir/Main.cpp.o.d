@@ -138,7 +138,18 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/ostream.tcc \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/istream \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/istream.tcc \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/unordered_map \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/ext/aligned_buffer.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable_policy.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/enable_special_members.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_map.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/erase_if.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/State.h \
+ /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/PlayerScore.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/mutex \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/std_mutex.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unique_lock.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/RandOption.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../utils/Random.h \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/random \
@@ -155,10 +166,8 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/numeric \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/stl_numeric.h \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bit \
+ /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../utils/ThreadUtils.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../ADT/List.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/mutex \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/std_mutex.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unique_lock.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../ADT/Node.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../ADT/Stack.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../ADT/Queue.h \
@@ -171,13 +180,6 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../Map/../ADT/../utils/Max.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../Map/../utils/Random.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/../Map/../ADT/Point.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/unordered_map \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/ext/aligned_buffer.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/hashtable_policy.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/enable_special_members.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_map.h \
- /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/erase_if.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/Freighter.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/Mole.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Characters/../Interfaces/iSkill.h \
