@@ -188,9 +188,9 @@ class GameThread {
                 }
 
                 pauseAll();
-                printf("\n");
                 delete setupThread;
-                sleep(1);
+                printf("\nPlayer #%d's Turn Finished!\n\nLoading...\n", currentTurn+1);
+                sleep(3);
             }
             stopAll();
             // showResults();

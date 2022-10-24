@@ -11,8 +11,8 @@
 
 # define PLAYERS 2
 # define DURATION 120
-# define MINERS 1
-# define ROOMS 6
+# define MINERS 2
+# define ROOMS 2
 using namespace std;
 
 //utilizar constantes e implementarlas

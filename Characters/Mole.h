@@ -33,9 +33,10 @@ struct Mole: public Character, public iSkill {
                     break;
 
                 case UNAVAILABLE:
-                default:
                     //executeSkill()
-                    break;
+                case DONE:
+                    *isDone = true;
+                    return;
             }
             display_action();
         }
