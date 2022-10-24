@@ -212,6 +212,8 @@ CMakeFiles/Caso_4_ED.dir/main.cpp.o: \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Threads/../Map/../ADT/../utils/Max.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Threads/../Map/../utils/Random.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Threads/../Map/../ADT/Point.h \
+ /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Threads/../ADT/Priority_Queue.h \
+ /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Threads/../ADT/Prio_Q_Node.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Map.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Room.h \
  /cygdrive/c/Users/joseg/OneDrive/Desktop/Work/Repositories/Caso_4_ED/Map/Tunnel.h \
