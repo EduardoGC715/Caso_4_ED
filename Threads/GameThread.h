@@ -178,7 +178,7 @@ class GameThread {
                 else{
                     int curr_score = scores->get_first_priority();
                     int player = scores->dequeue() - curr_score;
-                    printf("#%d: Player %d Score:%d\n", index, player, curr_score);
+                    printf("#%d: Player %d Score:%d\n", index+1, player, curr_score);
                 }
                 index++;
                 if(!done && index==MAX_PLAYERS){
