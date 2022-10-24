@@ -44,6 +44,14 @@ public:
         m_key = t_key;
     }
 
+    Tree_Node* get_child(int pDirection) {
+        if (pDirection) {
+            return m_right;
+        } else {
+            return m_left;
+        }
+    }
+
     Tree_Node* get_left(){
         return m_left;
     }

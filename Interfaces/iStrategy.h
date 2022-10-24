@@ -2,6 +2,7 @@
 # include <string>
 # include <iostream>
 # include <unordered_map>
+# include "iSkill.h"
 # include "State.h"
 # include "PlayerScore.h"
 # include "RandOption.h"
@@ -15,7 +16,11 @@ typedef Tree_Node<Chamber> ChamberNode;
 typedef Stack<RandOption> PathOption;
 typedef unordered_map<int, ChamberNode*> ChamberHash;
 
+class Mole;
+
 class iStrategy {
+    friend class iSkill;
+    friend class Mole;
     protected:
         PlayerScore* score;
         State state;
@@ -166,14 +171,8 @@ class iStrategy {
             int chamberID;
             ChamberNode* nextChamber = nullptr;
             RandOption* currentOptions = tunnelOptions->top();
-            switch (currentOptions->getOption()) { // Selecciona camara
-                case 0:
-                    nextChamber = currentChamber->get_left();
-                    break;
-                case 1:
-                    nextChamber = currentChamber->get_right();
-                    break;
-            }// Nota: Posible mejor a TreeNode -> getChild(Direction);
+            int option = currentOptions->getOption();
+            nextChamber = currentChamber->get_child(option);
 
             if (nextChamber != nullptr) {
                 chamberID = nextChamber->get_data()->get_ID();
