@@ -11,17 +11,14 @@
 
 # define PLAYERS 2
 # define DURATION 120
-# define MINERS 1
-# define ROOMS 6
+# define MINERS 2
+# define ROOMS 2
 using namespace std;
 
 //utilizar constantes e implementarlas
 int main() {
     auto mapa=new Map(ROOMS);
     mapa->generate_map();
-    mapa->print_map_info();
-    mapa->print_relations_map();
-    mapa->print_graphic_map();
 
     minerHash* miners = new minerHash;
     miners->emplace(1, new Explorer);

@@ -10,7 +10,11 @@ struct Character {
         iStrategy* strategy;
 
         void display_action() {
-            printf("#%d) %s: %s\n", ID, name.c_str(), strategy->message.c_str());
+            string indentation = "";
+            for (int index = 0; index < ID; ++index) {
+                indentation.append("    ");
+            }
+            printf("\n%s#%d) %s: %s\n", indentation.c_str(), ID, name.c_str(), strategy->message.c_str());
         }
 
     public:
@@ -57,13 +61,10 @@ struct Character {
                     strategy->score_minerals();
                     break;
 
+                case UNAVAILABLE:
                 case DONE:
                     *isDone = true;
                     return;
-
-                case UNAVAILABLE:
-                default:
-                    break;
             }
             display_action();
         }
