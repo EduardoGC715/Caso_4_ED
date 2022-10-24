@@ -167,6 +167,12 @@ class GameThread {
             return true;
         }
 
+        void print_all_map_data() {
+            gameMap->print_map_info();
+            gameMap->print_relations_map();
+            gameMap->print_graphic_map();
+        }
+
         void operator() () {
             // initMap();
             printf("Game Start!\n");
@@ -174,6 +180,7 @@ class GameThread {
             initSubthreads();
             thread* setupThread = nullptr;
             for (currentTurn = 0; currentTurn < MAX_PLAYERS; ++currentTurn) {
+                print_all_map_data();
                 printf("\nPlayer #%d's Turn\n", currentTurn+1);
                 timeLeft = TURN_DURATION;
 

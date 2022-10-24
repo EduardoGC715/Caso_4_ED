@@ -235,7 +235,7 @@ class iStrategy {
                 retreat_chamber();
             } else {
                 int chamberID = tunnelEntrance->get_data()->get_ID();
-                message = ("Retrieved minerals from tunnel #" + to_string(chamberID));
+                message = ("Retrieved minerals from tunnel #" + to_string(chamberID/100));
                 state = SCORE;
                 sleep(1);
             }

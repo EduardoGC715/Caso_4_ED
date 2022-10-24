@@ -19,9 +19,6 @@ using namespace std;
 int main() {
     auto mapa=new Map(ROOMS);
     mapa->generate_map();
-    mapa->print_map_info();
-    mapa->print_relations_map();
-    mapa->print_graphic_map();
 
     minerHash* miners = new minerHash;
     miners->emplace(1, new Explorer);
